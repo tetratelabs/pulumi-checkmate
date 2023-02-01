@@ -1,0 +1,16 @@
+name: basicprogram
+runtime: yaml
+resources:
+  r1:
+    type: check:index/httpHealth:HttpHealth
+    properties:
+      url: "https://example.com"
+      retries: 5
+      consecutiveSuccesses: 1
+  r2:
+    type: check:index/localCommand:LocalCommand
+    properties:
+      command: "echo hello world"
+      retries: 5
+      consecutiveSuccesses: 1
+      timeout: 10000
