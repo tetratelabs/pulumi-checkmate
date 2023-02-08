@@ -1,14 +1,14 @@
 {
   "resources": {
-    "check:index/httpHealth:HttpHealth": "checkmate_http_health",
-    "check:index/localCommand:LocalCommand": "checkmate_local_command"
+    "checkmate:index/httpHealth:HttpHealth": "checkmate_http_health",
+    "checkmate:index/localCommand:LocalCommand": "checkmate_local_command"
   },
   "renamedProperties": {
-    "check:index/httpHealth:HttpHealth": {
+    "checkmate:index/httpHealth:HttpHealth": {
       "consecutiveSuccesses": "consecutive_successes",
       "statusCode": "status_code"
     },
-    "check:index/localCommand:LocalCommand": {
+    "checkmate:index/localCommand:LocalCommand": {
       "consecutiveSuccesses": "consecutive_successes",
       "workingDirectory": "working_directory"
     }

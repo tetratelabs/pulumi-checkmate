@@ -1,10 +1,10 @@
 {
-    "name": "@pulumi/check",
+    "name": "@pulumi/checkmate",
     "version": "${VERSION}",
     "description": ". Based on terraform-provider-checkmate: version v0.0.1",
     "scripts": {
         "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource check ${VERSION}"
+        "install": "node scripts/install-pulumi-plugin.js resource checkmate ${VERSION}"
     },
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0"
@@ -15,6 +15,6 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "check"
+        "name": "checkmate"
     }
 }

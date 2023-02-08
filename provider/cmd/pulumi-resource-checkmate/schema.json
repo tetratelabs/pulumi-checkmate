@@ -1,5 +1,5 @@
 {
-    "name": "check",
+    "name": "checkmate",
     "attribution": "This Pulumi package is based on the [`checkmate` Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate).",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
@@ -16,12 +16,12 @@
             "disableUnionOutputTypes": true,
             "packageDescription": ". Based on terraform-provider-checkmate: version v0.0.1",
             "packageName": "",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-check` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
         },
         "python": {
             "compatibility": "tfbridge20",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-check` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues)."
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues)."
         }
     },
     "config": {},
@@ -29,7 +29,7 @@
         "description": "The provider type for the checkmate package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
     },
     "resources": {
-        "check:index/httpHealth:HttpHealth": {
+        "checkmate:index/httpHealth:HttpHealth": {
             "properties": {
                 "consecutiveSuccesses": {
                     "type": "integer",
@@ -158,7 +158,7 @@
                 "type": "object"
             }
         },
-        "check:index/localCommand:LocalCommand": {
+        "checkmate:index/localCommand:LocalCommand": {
             "properties": {
                 "command": {
                     "type": "string",

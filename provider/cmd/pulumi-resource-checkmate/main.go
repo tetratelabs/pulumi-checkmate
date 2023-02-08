@@ -15,11 +15,19 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/tfgen"
+	_ "embed"
+
+	bridge "github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge"
 
 	checkmate "github.com/tetratelabs/pulumi-checkmate/provider"
 )
 
+//go:embed schema.json
+var pulumiSchema []byte
+
+//go:embed renames.json
+var pulumiRenames []byte
+
 func main() {
-	tfgen.Main("check", "0.0.1", checkmate.Provider())
+	bridge.Main("checkmate", "0.0.1", checkmate.Provider(), pulumiSchema, pulumiRenames)
 }

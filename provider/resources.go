@@ -24,7 +24,7 @@ import (
 	provider "github.com/tetratelabs/terraform-provider-checkmate/pkg"
 )
 
-const checkPkg = "check"
+const checkPkg = "checkmate"
 const checkMod = "index"
 
 func getProvider() framework.Provider {
