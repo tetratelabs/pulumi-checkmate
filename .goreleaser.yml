@@ -1,7 +1,6 @@
 before:
   hooks:
-    # this is just an example and not a requirement for provider building/publishing
-    - go mod tidy
+    - make schema
 builds:
 - binary: pulumi-resource-checkmate
   env:
@@ -26,8 +25,8 @@ builds:
     - goos: darwin
       goarch: '386'
 archives:
-- format: zip
-  name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+- format: tgz
+  name_template: '{{ .Binary }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}'
 checksum:
   # extra_files:
   #   - glob: 'terraform-registry-manifest.json'
