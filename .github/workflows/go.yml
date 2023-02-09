@@ -14,13 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Download licenser
-      run: 'wget -c https://github.com/liamawhite/licenser/releases/download/v0.6.0/licenser_0.6.0_Linux_x86_64.tar.gz -O - | sudo tar -xz -C /usr/bin'
 
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
         go-version: 1.19
+    - name: Install licenser
+
+      run: 'go install github.com/liamawhite/licenser@v0.7.0'
 
     - name: Build
       run: make
