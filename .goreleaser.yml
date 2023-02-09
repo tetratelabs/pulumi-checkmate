@@ -26,7 +26,7 @@ builds:
       goarch: '386'
 archives:
 - format: 'tar.gz'
-  name_template: '{{ .Binary }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}'
+  name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
 checksum:
   # extra_files:
   #   - glob: 'terraform-registry-manifest.json'
