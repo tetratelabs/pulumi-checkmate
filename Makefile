@@ -23,9 +23,14 @@ BRIDGE=provider/cmd/pulumi-resource-checkmate
 schema:
 	cd $(TFGEN) && go run main.go schema -o ../pulumi-resource-checkmate
 
+licenser:
+	licenser apply Tetrate -r
+
 # generates the typescript package for using the provider
 # this requires the provider to be installed in $PATH
-sdk: schema
+sdk: schema sdk.nodejs licenser
+
+sdk.nodejs:
 	cd $(TFGEN) && go run main.go nodejs -o ../../../sdk
 
 # builds the pulumi terraform bridge
