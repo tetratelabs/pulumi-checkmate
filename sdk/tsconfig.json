@@ -10,8 +10,10 @@
         "experimentalDecorators": true,
         "noFallthroughCasesInSwitch": true,
         "forceConsistentCasingInFileNames": true,
-        "strict": true
+        "strict": true,
+        "resolveJsonModule": true
     },
+    "include": ["package.json"],
     "files": [
         "httpHealth.ts",
         "index.ts",
