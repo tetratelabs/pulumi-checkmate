@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "bin",
+        "outDir": "ts_bin",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -15,10 +15,11 @@
     },
     "include": ["package.json"],
     "files": [
-        "httpHealth.ts",
         "index.ts",
-        "localCommand.ts",
-        "provider.ts",
-        "utilities.ts"
+        "sdk/httpHealth.ts",
+        "sdk/index.ts",
+        "sdk/localCommand.ts",
+        "sdk/provider.ts",
+        "sdk/utilities.ts"
     ]
 }

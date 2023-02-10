@@ -2,12 +2,12 @@
   "name": "@tetratelabs/checkmate",
   "version": "0.1.0",
   "description": ". Based on terraform-provider-checkmate: version v0.0.1",
-  "main": "bin/index.js",
-  "types": "bin/index.d.ts",
+  "main": "ts_bin/index.js",
+  "types": "ts_bin/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
-    "install": "node scripts/install-pulumi-plugin.js resource checkmate --server github://api.github.com/tetratelabs"
+    "install": "node sdk/scripts/install-pulumi-plugin.js resource checkmate --server github://api.github.com/tetratelabs"
   },
   "dependencies": {
     "@pulumi/pulumi": "^3.0.0"
