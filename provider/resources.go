@@ -18,7 +18,8 @@ import (
 	"unicode"
 
 	framework "github.com/hashicorp/terraform-plugin-framework/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/info"
+	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
 
 	provider "github.com/tetratelabs/terraform-provider-checkmate/pkg"
@@ -44,18 +45,17 @@ func checkResourceTok(mod string, res string) tokens.Type {
 	return checkType(mod+"/"+fn, res)
 }
 
-func Provider() info.ProviderInfo {
-	return info.ProviderInfo{
-		P:                 getProvider,
+func Provider() tfpfbridge.ProviderInfo {
+	info := tfbridge.ProviderInfo{
 		Name:              "checkmate",
 		GitHubOrg:         "tetratelabs",
 		TFProviderVersion: "0.0.1",
 		Version:           "0.0.1",
-		Resources: map[string]*info.ResourceInfo{
+		Resources: map[string]*tfbridge.ResourceInfo{
 			"checkmate_http_health":   {Tok: checkResourceTok(checkMod, "HttpHealth")},
 			"checkmate_local_command": {Tok: checkResourceTok(checkMod, "LocalCommand")},
 		},
-		JavaScript: &info.JavaScriptInfo{
+		JavaScript: &tfbridge.JavaScriptInfo{
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
@@ -63,5 +63,9 @@ func Provider() info.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
 		},
+	}
+	return tfpfbridge.ProviderInfo{
+		ProviderInfo: info,
+		NewProvider:  getProvider,
 	}
 }

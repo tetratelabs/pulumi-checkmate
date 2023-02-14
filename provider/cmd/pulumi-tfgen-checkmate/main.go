@@ -15,11 +15,11 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfgen"
 
 	checkmate "github.com/tetratelabs/pulumi-checkmate/provider"
 )
 
 func main() {
-	tfgen.Main("checkmate", "0.0.1", checkmate.Provider())
+	tfgen.Main("checkmate", checkmate.Provider())
 }

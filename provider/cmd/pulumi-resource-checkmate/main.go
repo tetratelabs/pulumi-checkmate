@@ -15,9 +15,10 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 
-	bridge "github.com/pulumi/pulumi-terraform-bridge/pkg/tfpfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 
 	checkmate "github.com/tetratelabs/pulumi-checkmate/provider"
 )
@@ -25,9 +26,13 @@ import (
 //go:embed schema.json
 var pulumiSchema []byte
 
-//go:embed renames.json
-var pulumiRenames []byte
+// go:embed bridge-metadata.json
+var bridgeMetadata []byte
 
 func main() {
-	bridge.Main("checkmate", "0.0.1", checkmate.Provider(), pulumiSchema, pulumiRenames)
+	meta := tfbridge.ProviderMetadata{
+		PackageSchema:  pulumiSchema,
+		BridgeMetadata: bridgeMetadata,
+	}
+	tfbridge.Main(context.Background(), "checkmate", checkmate.Provider(), meta)
 }
