@@ -26,7 +26,7 @@ import (
 //go:embed schema.json
 var pulumiSchema []byte
 
-// go:embed bridge-metadata.json
+//go:embed bridge-metadata.json
 var bridgeMetadata []byte
 
 func main() {

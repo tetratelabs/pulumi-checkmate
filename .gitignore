@@ -1,3 +1,4 @@
 dist/
 node_modules/
 ts_bin/
+provider/cmd/pulumi-resource-checkmate/pulumi-resource-checkmate
