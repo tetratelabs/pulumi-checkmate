@@ -1,6 +1,6 @@
 {
   "name": "@tetratelabs/checkmate",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": ". Based on terraform-provider-checkmate: version v0.0.1",
   "main": "ts_bin/index.js",
   "types": "ts_bin/index.d.ts",
