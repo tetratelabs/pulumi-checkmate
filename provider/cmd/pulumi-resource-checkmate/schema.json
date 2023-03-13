@@ -33,7 +33,7 @@
             "properties": {
                 "consecutiveSuccesses": {
                     "type": "integer",
-                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                 },
                 "headers": {
                     "type": "object",
@@ -41,6 +41,10 @@
                         "type": "string"
                     },
                     "description": "HTTP Request Headers\n"
+                },
+                "ignoreFailure": {
+                    "type": "boolean",
+                    "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -50,9 +54,17 @@
                     "type": "string",
                     "description": "HTTP Method, defaults to GET\n"
                 },
+                "passed": {
+                    "type": "boolean",
+                    "description": "True if the check passed\n"
+                },
+                "resultBody": {
+                    "type": "string",
+                    "description": "Result body\n"
+                },
                 "retries": {
                     "type": "integer",
-                    "description": "Max number of times to retry a failure. Default 5\n"
+                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "statusCode": {
                     "type": "string",
@@ -71,6 +83,8 @@
                 "consecutiveSuccesses",
                 "interval",
                 "method",
+                "passed",
+                "resultBody",
                 "retries",
                 "statusCode",
                 "timeout",
@@ -79,7 +93,7 @@
             "inputProperties": {
                 "consecutiveSuccesses": {
                     "type": "integer",
-                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                 },
                 "headers": {
                     "type": "object",
@@ -87,6 +101,10 @@
                         "type": "string"
                     },
                     "description": "HTTP Request Headers\n"
+                },
+                "ignoreFailure": {
+                    "type": "boolean",
+                    "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -98,7 +116,7 @@
                 },
                 "retries": {
                     "type": "integer",
-                    "description": "Max number of times to retry a failure. Default 5\n"
+                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "statusCode": {
                     "type": "string",
@@ -121,7 +139,7 @@
                 "properties": {
                     "consecutiveSuccesses": {
                         "type": "integer",
-                        "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                        "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                     },
                     "headers": {
                         "type": "object",
@@ -129,6 +147,10 @@
                             "type": "string"
                         },
                         "description": "HTTP Request Headers\n"
+                    },
+                    "ignoreFailure": {
+                        "type": "boolean",
+                        "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                     },
                     "interval": {
                         "type": "integer",
@@ -138,9 +160,17 @@
                         "type": "string",
                         "description": "HTTP Method, defaults to GET\n"
                     },
+                    "passed": {
+                        "type": "boolean",
+                        "description": "True if the check passed\n"
+                    },
+                    "resultBody": {
+                        "type": "string",
+                        "description": "Result body\n"
+                    },
                     "retries": {
                         "type": "integer",
-                        "description": "Max number of times to retry a failure. Default 5\n"
+                        "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                     },
                     "statusCode": {
                         "type": "string",

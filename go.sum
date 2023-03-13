@@ -1613,8 +1613,6 @@ github.com/pulumi/pulumi-java/pkg v0.8.0 h1:b81/D/dk5/9OEH1k5BJxhqYiQc7Y4TPDbHVG
 github.com/pulumi/pulumi-java/pkg v0.8.0/go.mod h1:x7/J1GCJ+hHFBEgnMr4QpsTfjXUNHccAHJ9gvFfmAFU=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.5.0 h1:G1712xQyCTkilyPh/yKSI78nFG9vJQ7PIct1Em+OWM8=
 github.com/pulumi/pulumi-terraform-bridge/pf v0.5.0/go.mod h1:ZJ/EWC8Ltuwa/Qvy9MZG3sWmBRh3N2BAKrLamiek7EE=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221214173921-8e65b1f9fdd5 h1:cdFbwsev+ihDexxfxYeS4B5rfiBZErMwaBk86CGl9lo=
-github.com/pulumi/pulumi-terraform-bridge/v3 v3.34.1-0.20221214173921-8e65b1f9fdd5/go.mod h1:ba1dLETCVZnmdavrrVfg9goz5CjhsqgRfF/NPkLTr28=
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.42.2-0.20230310190346-b41b08e59efa h1:j0iqt8MXrcQwbwzdFJU2Bq3QJfBhKhgfXpP2hOHz0+g=
 github.com/pulumi/pulumi-terraform-bridge/v3 v3.42.2-0.20230310190346-b41b08e59efa/go.mod h1:ej3U842Dtjk6kIQv2b3dtHKqFyggbZqlDoPWzc2EZvM=
 github.com/pulumi/pulumi-yaml v1.0.4 h1:p+989rW3AqkkxbzxtxccHKAN4xCJi3K2cRpvA2K84tw=
@@ -1753,8 +1751,8 @@ github.com/syndtr/gocapability v0.0.0-20180916011248-d98352740cb2/go.mod h1:hkRG
 github.com/syndtr/gocapability v0.0.0-20200815063812-42c35b437635/go.mod h1:hkRG7XYTFWNJGYcbNJQlaLq0fg1yr4J4t/NcTQtrfww=
 github.com/tchap/go-patricia v2.2.6+incompatible/go.mod h1:bmLyhP68RS6kStMGxByiQ23RP/odRBOTVjwp2cDyi6I=
 github.com/tedsuo/ifrit v0.0.0-20180802180643-bea94bb476cc/go.mod h1:eyZnKCc955uh98WQvzOm0dgAeLnf2O0Rz0LPoC5ze+0=
-github.com/tetratelabs/terraform-provider-checkmate v0.1.2 h1:79xltKhjw45xBP75RjGzTl0S8AnTlFLZeyJY4YTnbTM=
-github.com/tetratelabs/terraform-provider-checkmate v0.1.2/go.mod h1:ytQ+OsBncLqnwaoXAfrkUxlXT8jt+aBOybBZOcWqUN4=
+github.com/tetratelabs/terraform-provider-checkmate v0.1.3 h1:XRyxlFXXaih/urZx1EMeEuiN+0HZF2bhv9sdUmt6/lA=
+github.com/tetratelabs/terraform-provider-checkmate v0.1.3/go.mod h1:ytQ+OsBncLqnwaoXAfrkUxlXT8jt+aBOybBZOcWqUN4=
 github.com/texttheater/golang-levenshtein v1.0.1 h1:+cRNoVrfiwufQPhoMzB6N0Yf/Mqajr6t1lOv8GyGE2U=
 github.com/texttheater/golang-levenshtein v1.0.1/go.mod h1:PYAKrbF5sAiq9wd+H82hs7gNaen0CplQ9uvm6+enD/8=
 github.com/tidwall/pretty v1.0.0/go.mod h1:XNkn88O1ChpSDQmQeStsy+sBenx6DDtFZJxhVysOjyk=

@@ -47,14 +47,17 @@ export class HttpHealth extends pulumi.CustomResource {
     }
 
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     public readonly consecutiveSuccesses!: pulumi.Output<number>;
     /**
      * HTTP Request Headers
      */
     public readonly headers!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
+     * If set to true, the check will not be considered a failure when it does not pass
+     */
+    public readonly ignoreFailure!: pulumi.Output<boolean | undefined>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -64,7 +67,16 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public readonly method!: pulumi.Output<string>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * True if the check passed
+     */
+    public /*out*/ readonly passed!: pulumi.Output<boolean>;
+    /**
+     * Result body
+     */
+    public /*out*/ readonly resultBody!: pulumi.Output<string>;
+    /**
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     public readonly retries!: pulumi.Output<number>;
     /**
@@ -95,8 +107,11 @@ export class HttpHealth extends pulumi.CustomResource {
             const state = argsOrState as HttpHealthState | undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
             resourceInputs["headers"] = state ? state.headers : undefined;
+            resourceInputs["ignoreFailure"] = state ? state.ignoreFailure : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
+            resourceInputs["passed"] = state ? state.passed : undefined;
+            resourceInputs["resultBody"] = state ? state.resultBody : undefined;
             resourceInputs["retries"] = state ? state.retries : undefined;
             resourceInputs["statusCode"] = state ? state.statusCode : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
@@ -108,12 +123,15 @@ export class HttpHealth extends pulumi.CustomResource {
             }
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["headers"] = args ? args.headers : undefined;
+            resourceInputs["ignoreFailure"] = args ? args.ignoreFailure : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
             resourceInputs["retries"] = args ? args.retries : undefined;
             resourceInputs["statusCode"] = args ? args.statusCode : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
+            resourceInputs["passed"] = undefined /*out*/;
+            resourceInputs["resultBody"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(HttpHealth.__pulumiType, name, resourceInputs, opts);
@@ -125,14 +143,17 @@ export class HttpHealth extends pulumi.CustomResource {
  */
 export interface HttpHealthState {
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
     /**
      * HTTP Request Headers
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * If set to true, the check will not be considered a failure when it does not pass
+     */
+    ignoreFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -142,7 +163,16 @@ export interface HttpHealthState {
      */
     method?: pulumi.Input<string>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * True if the check passed
+     */
+    passed?: pulumi.Input<boolean>;
+    /**
+     * Result body
+     */
+    resultBody?: pulumi.Input<string>;
+    /**
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     retries?: pulumi.Input<number>;
     /**
@@ -164,14 +194,17 @@ export interface HttpHealthState {
  */
 export interface HttpHealthArgs {
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
     /**
      * HTTP Request Headers
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * If set to true, the check will not be considered a failure when it does not pass
+     */
+    ignoreFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -181,7 +214,8 @@ export interface HttpHealthArgs {
      */
     method?: pulumi.Input<string>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     retries?: pulumi.Input<number>;
     /**

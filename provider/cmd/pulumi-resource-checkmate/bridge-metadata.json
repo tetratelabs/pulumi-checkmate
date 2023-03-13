@@ -6,6 +6,8 @@
   "renamedProperties": {
     "checkmate:index/httpHealth:HttpHealth": {
       "consecutiveSuccesses": "consecutive_successes",
+      "ignoreFailure": "ignore_failure",
+      "resultBody": "result_body",
       "statusCode": "status_code"
     },
     "checkmate:index/localCommand:LocalCommand": {
