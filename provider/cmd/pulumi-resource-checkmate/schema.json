@@ -14,7 +14,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v0.0.1",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.0.0",
             "packageName": "",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
@@ -35,16 +35,16 @@
                     "type": "integer",
                     "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                 },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
                     "description": "HTTP Request Headers\n"
-                },
-                "ignoreFailure": {
-                    "type": "boolean",
-                    "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -57,6 +57,10 @@
                 "passed": {
                     "type": "boolean",
                     "description": "True if the check passed\n"
+                },
+                "requestTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
                 },
                 "resultBody": {
                     "type": "string",
@@ -84,6 +88,7 @@
                 "interval",
                 "method",
                 "passed",
+                "requestTimeout",
                 "resultBody",
                 "retries",
                 "statusCode",
@@ -95,16 +100,16 @@
                     "type": "integer",
                     "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                 },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                },
                 "headers": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
                     },
                     "description": "HTTP Request Headers\n"
-                },
-                "ignoreFailure": {
-                    "type": "boolean",
-                    "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -113,6 +118,10 @@
                 "method": {
                     "type": "string",
                     "description": "HTTP Method, defaults to GET\n"
+                },
+                "requestTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
                 },
                 "retries": {
                     "type": "integer",
@@ -141,16 +150,16 @@
                         "type": "integer",
                         "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
                     },
+                    "createAnywayOnCheckFailure": {
+                        "type": "boolean",
+                        "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                    },
                     "headers": {
                         "type": "object",
                         "additionalProperties": {
                             "type": "string"
                         },
                         "description": "HTTP Request Headers\n"
-                    },
-                    "ignoreFailure": {
-                        "type": "boolean",
-                        "description": "If set to true, the check will not be considered a failure when it does not pass\n"
                     },
                     "interval": {
                         "type": "integer",
@@ -163,6 +172,10 @@
                     "passed": {
                         "type": "boolean",
                         "description": "True if the check passed\n"
+                    },
+                    "requestTimeout": {
+                        "type": "integer",
+                        "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
                     },
                     "resultBody": {
                         "type": "string",
@@ -194,21 +207,41 @@
                     "type": "string",
                     "description": "The command to run (passed to `sh -c`)\n"
                 },
+                "commandTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                },
                 "consecutiveSuccesses": {
                     "type": "integer",
-                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
                 },
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
                 },
+                "passed": {
+                    "type": "boolean",
+                    "description": "True if the check passed\n"
+                },
                 "retries": {
                     "type": "integer",
-                    "description": "Max number of times to retry a failure. Default 5\n"
+                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
+                },
+                "stderr": {
+                    "type": "string",
+                    "description": "Standard error output of the command\n"
+                },
+                "stdout": {
+                    "type": "string",
+                    "description": "Standard output of the command\n"
                 },
                 "timeout": {
                     "type": "integer",
-                    "description": "Overall timeout in milliseconds for the check before giving up, default 5000\n"
+                    "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
                 },
                 "workingDirectory": {
                     "type": "string",
@@ -217,9 +250,13 @@
             },
             "required": [
                 "command",
+                "commandTimeout",
                 "consecutiveSuccesses",
                 "interval",
+                "passed",
                 "retries",
+                "stderr",
+                "stdout",
                 "timeout",
                 "workingDirectory"
             ],
@@ -228,9 +265,17 @@
                     "type": "string",
                     "description": "The command to run (passed to `sh -c`)\n"
                 },
+                "commandTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                },
                 "consecutiveSuccesses": {
                     "type": "integer",
-                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -238,11 +283,11 @@
                 },
                 "retries": {
                     "type": "integer",
-                    "description": "Max number of times to retry a failure. Default 5\n"
+                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "timeout": {
                     "type": "integer",
-                    "description": "Overall timeout in milliseconds for the check before giving up, default 5000\n"
+                    "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
                 },
                 "workingDirectory": {
                     "type": "string",
@@ -259,21 +304,41 @@
                         "type": "string",
                         "description": "The command to run (passed to `sh -c`)\n"
                     },
+                    "commandTimeout": {
+                        "type": "integer",
+                        "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                    },
                     "consecutiveSuccesses": {
                         "type": "integer",
-                        "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are\nfewer retries remaining than this number, the check will fail immediately\n"
+                        "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                    },
+                    "createAnywayOnCheckFailure": {
+                        "type": "boolean",
+                        "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
                     },
                     "interval": {
                         "type": "integer",
                         "description": "Interval in milliseconds between attemps. Default 200\n"
                     },
+                    "passed": {
+                        "type": "boolean",
+                        "description": "True if the check passed\n"
+                    },
                     "retries": {
                         "type": "integer",
-                        "description": "Max number of times to retry a failure. Default 5\n"
+                        "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
+                    },
+                    "stderr": {
+                        "type": "string",
+                        "description": "Standard error output of the command\n"
+                    },
+                    "stdout": {
+                        "type": "string",
+                        "description": "Standard output of the command\n"
                     },
                     "timeout": {
                         "type": "integer",
-                        "description": "Overall timeout in milliseconds for the check before giving up, default 5000\n"
+                        "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
                     },
                     "workingDirectory": {
                         "type": "string",

@@ -51,13 +51,14 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public readonly consecutiveSuccesses!: pulumi.Output<number>;
     /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    public readonly createAnywayOnCheckFailure!: pulumi.Output<boolean | undefined>;
+    /**
      * HTTP Request Headers
      */
     public readonly headers!: pulumi.Output<{[key: string]: string} | undefined>;
-    /**
-     * If set to true, the check will not be considered a failure when it does not pass
-     */
-    public readonly ignoreFailure!: pulumi.Output<boolean | undefined>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -70,6 +71,11 @@ export class HttpHealth extends pulumi.CustomResource {
      * True if the check passed
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
+    /**
+     * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 500
+     */
+    public readonly requestTimeout!: pulumi.Output<number>;
     /**
      * Result body
      */
@@ -106,11 +112,12 @@ export class HttpHealth extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as HttpHealthState | undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
+            resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
             resourceInputs["headers"] = state ? state.headers : undefined;
-            resourceInputs["ignoreFailure"] = state ? state.ignoreFailure : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
+            resourceInputs["requestTimeout"] = state ? state.requestTimeout : undefined;
             resourceInputs["resultBody"] = state ? state.resultBody : undefined;
             resourceInputs["retries"] = state ? state.retries : undefined;
             resourceInputs["statusCode"] = state ? state.statusCode : undefined;
@@ -122,10 +129,11 @@ export class HttpHealth extends pulumi.CustomResource {
                 throw new Error("Missing required property 'url'");
             }
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
+            resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
             resourceInputs["headers"] = args ? args.headers : undefined;
-            resourceInputs["ignoreFailure"] = args ? args.ignoreFailure : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
+            resourceInputs["requestTimeout"] = args ? args.requestTimeout : undefined;
             resourceInputs["retries"] = args ? args.retries : undefined;
             resourceInputs["statusCode"] = args ? args.statusCode : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
@@ -147,13 +155,14 @@ export interface HttpHealthState {
      */
     consecutiveSuccesses?: pulumi.Input<number>;
     /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    createAnywayOnCheckFailure?: pulumi.Input<boolean>;
+    /**
      * HTTP Request Headers
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    /**
-     * If set to true, the check will not be considered a failure when it does not pass
-     */
-    ignoreFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -166,6 +175,11 @@ export interface HttpHealthState {
      * True if the check passed
      */
     passed?: pulumi.Input<boolean>;
+    /**
+     * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 500
+     */
+    requestTimeout?: pulumi.Input<number>;
     /**
      * Result body
      */
@@ -198,13 +212,14 @@ export interface HttpHealthArgs {
      */
     consecutiveSuccesses?: pulumi.Input<number>;
     /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    createAnywayOnCheckFailure?: pulumi.Input<boolean>;
+    /**
      * HTTP Request Headers
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
-    /**
-     * If set to true, the check will not be considered a failure when it does not pass
-     */
-    ignoreFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -213,6 +228,11 @@ export interface HttpHealthArgs {
      * HTTP Method, defaults to GET
      */
     method?: pulumi.Input<string>;
+    /**
+     * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 500
+     */
+    requestTimeout?: pulumi.Input<number>;
     /**
      * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
      * expired yet. Default 5.

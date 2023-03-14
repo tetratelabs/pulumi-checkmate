@@ -6,12 +6,15 @@
   "renamedProperties": {
     "checkmate:index/httpHealth:HttpHealth": {
       "consecutiveSuccesses": "consecutive_successes",
-      "ignoreFailure": "ignore_failure",
+      "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
+      "requestTimeout": "request_timeout",
       "resultBody": "result_body",
       "statusCode": "status_code"
     },
     "checkmate:index/localCommand:LocalCommand": {
+      "commandTimeout": "command_timeout",
       "consecutiveSuccesses": "consecutive_successes",
+      "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
       "workingDirectory": "working_directory"
     }
   }

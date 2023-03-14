@@ -51,20 +51,42 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public readonly command!: pulumi.Output<string>;
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 5000ms
+     */
+    public readonly commandTimeout!: pulumi.Output<number>;
+    /**
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     public readonly consecutiveSuccesses!: pulumi.Output<number>;
+    /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    public readonly createAnywayOnCheckFailure!: pulumi.Output<boolean | undefined>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
     public readonly interval!: pulumi.Output<number>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * True if the check passed
+     */
+    public /*out*/ readonly passed!: pulumi.Output<boolean>;
+    /**
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     public readonly retries!: pulumi.Output<number>;
     /**
-     * Overall timeout in milliseconds for the check before giving up, default 5000
+     * Standard error output of the command
+     */
+    public /*out*/ readonly stderr!: pulumi.Output<string>;
+    /**
+     * Standard output of the command
+     */
+    public /*out*/ readonly stdout!: pulumi.Output<string>;
+    /**
+     * Overall timeout in milliseconds for the check before giving up, default 10000
      */
     public readonly timeout!: pulumi.Output<number>;
     /**
@@ -86,9 +108,14 @@ export class LocalCommand extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as LocalCommandState | undefined;
             resourceInputs["command"] = state ? state.command : undefined;
+            resourceInputs["commandTimeout"] = state ? state.commandTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
+            resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
+            resourceInputs["passed"] = state ? state.passed : undefined;
             resourceInputs["retries"] = state ? state.retries : undefined;
+            resourceInputs["stderr"] = state ? state.stderr : undefined;
+            resourceInputs["stdout"] = state ? state.stdout : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
             resourceInputs["workingDirectory"] = state ? state.workingDirectory : undefined;
         } else {
@@ -97,11 +124,16 @@ export class LocalCommand extends pulumi.CustomResource {
                 throw new Error("Missing required property 'command'");
             }
             resourceInputs["command"] = args ? args.command : undefined;
+            resourceInputs["commandTimeout"] = args ? args.commandTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
+            resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["retries"] = args ? args.retries : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
             resourceInputs["workingDirectory"] = args ? args.workingDirectory : undefined;
+            resourceInputs["passed"] = undefined /*out*/;
+            resourceInputs["stderr"] = undefined /*out*/;
+            resourceInputs["stdout"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(LocalCommand.__pulumiType, name, resourceInputs, opts);
@@ -117,20 +149,42 @@ export interface LocalCommandState {
      */
     command?: pulumi.Input<string>;
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 5000ms
+     */
+    commandTimeout?: pulumi.Input<number>;
+    /**
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
+    /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    createAnywayOnCheckFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * True if the check passed
+     */
+    passed?: pulumi.Input<boolean>;
+    /**
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     retries?: pulumi.Input<number>;
     /**
-     * Overall timeout in milliseconds for the check before giving up, default 5000
+     * Standard error output of the command
+     */
+    stderr?: pulumi.Input<string>;
+    /**
+     * Standard output of the command
+     */
+    stdout?: pulumi.Input<string>;
+    /**
+     * Overall timeout in milliseconds for the check before giving up, default 10000
      */
     timeout?: pulumi.Input<number>;
     /**
@@ -148,20 +202,30 @@ export interface LocalCommandArgs {
      */
     command: pulumi.Input<string>;
     /**
-     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1. If there are
-     * fewer retries remaining than this number, the check will fail immediately
+     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 5000ms
+     */
+    commandTimeout?: pulumi.Input<number>;
+    /**
+     * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
+    /**
+     * If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.
+     * Defaults to false.
+     */
+    createAnywayOnCheckFailure?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
     /**
-     * Max number of times to retry a failure. Default 5
+     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
+     * expired yet. Default 5.
      */
     retries?: pulumi.Input<number>;
     /**
-     * Overall timeout in milliseconds for the check before giving up, default 5000
+     * Overall timeout in milliseconds for the check before giving up, default 10000
      */
     timeout?: pulumi.Input<number>;
     /**
