@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+VERSION=1.0.0
+
 default: build
 
 build: schema bridge sdk
@@ -45,3 +47,9 @@ install: bridge
 # TODO: currently needs the bridge and provider to be installed
 test: bridge
 	cd $(BRIDGE)/test && pulumi up --stack dev
+
+versioncheck:
+	[ `git tag --points-at HEAD` == v${VERSION} ]
+	grep -q '"version": "'${VERSION} package.json
+	grep -q "v${VERSION}" sdk/scripts/install-pulumi-plugin.js
+	grep -q "\sVersion:.*${VERSION}" provider/resources.go
