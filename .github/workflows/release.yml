@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       - name: Unshallow
         run: git fetch --prune --unshallow
-      - run: make versioncheck
+      - run: make tagcheck
       - name: Set up Go
         uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3.5.0
         with:
@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # Setup .npmrc file to publish to npm
-      - run: make versioncheck
+      - run: make tagcheck
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
