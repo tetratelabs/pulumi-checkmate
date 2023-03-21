@@ -59,4 +59,4 @@ versioncheck: providerversion
 	grep -q "v${VERSION}" sdk/scripts/install-pulumi-plugin.js || (echo sdk/scripts/install-pulumi-plugin.js version does not match && false)
 
 tagcheck: versioncheck
-	[ `git tag --points-at HEAD` == v${VERSION} ] || (echo tag does not match specified version && false)
+	git tag --points-at HEAD | grep -q v${VERSION} || (echo tag does not match specified version && false)
