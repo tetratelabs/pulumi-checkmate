@@ -47,6 +47,10 @@ export class HttpHealth extends pulumi.CustomResource {
     }
 
     /**
+     * The CA bundle to use when connecting to the target host.
+     */
+    public readonly caBundle!: pulumi.Output<string | undefined>;
+    /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     public readonly consecutiveSuccesses!: pulumi.Output<number>;
@@ -59,6 +63,10 @@ export class HttpHealth extends pulumi.CustomResource {
      * HTTP Request Headers
      */
     public readonly headers!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
+     * Wether or not to completely skip the TLS CA verification. Default false.
+     */
+    public readonly insecureTls!: pulumi.Output<boolean | undefined>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -73,7 +81,7 @@ export class HttpHealth extends pulumi.CustomResource {
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
     /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
-     * 500
+     * 1000
      */
     public readonly requestTimeout!: pulumi.Output<number>;
     /**
@@ -111,9 +119,11 @@ export class HttpHealth extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as HttpHealthState | undefined;
+            resourceInputs["caBundle"] = state ? state.caBundle : undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
             resourceInputs["headers"] = state ? state.headers : undefined;
+            resourceInputs["insecureTls"] = state ? state.insecureTls : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
@@ -128,9 +138,11 @@ export class HttpHealth extends pulumi.CustomResource {
             if ((!args || args.url === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'url'");
             }
+            resourceInputs["caBundle"] = args ? args.caBundle : undefined;
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
             resourceInputs["headers"] = args ? args.headers : undefined;
+            resourceInputs["insecureTls"] = args ? args.insecureTls : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
             resourceInputs["requestTimeout"] = args ? args.requestTimeout : undefined;
@@ -151,6 +163,10 @@ export class HttpHealth extends pulumi.CustomResource {
  */
 export interface HttpHealthState {
     /**
+     * The CA bundle to use when connecting to the target host.
+     */
+    caBundle?: pulumi.Input<string>;
+    /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
@@ -163,6 +179,10 @@ export interface HttpHealthState {
      * HTTP Request Headers
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * Wether or not to completely skip the TLS CA verification. Default false.
+     */
+    insecureTls?: pulumi.Input<boolean>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -177,7 +197,7 @@ export interface HttpHealthState {
     passed?: pulumi.Input<boolean>;
     /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
-     * 500
+     * 1000
      */
     requestTimeout?: pulumi.Input<number>;
     /**
@@ -208,6 +228,10 @@ export interface HttpHealthState {
  */
 export interface HttpHealthArgs {
     /**
+     * The CA bundle to use when connecting to the target host.
+     */
+    caBundle?: pulumi.Input<string>;
+    /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
     consecutiveSuccesses?: pulumi.Input<number>;
@@ -221,6 +245,10 @@ export interface HttpHealthArgs {
      */
     headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
+     * Wether or not to completely skip the TLS CA verification. Default false.
+     */
+    insecureTls?: pulumi.Input<boolean>;
+    /**
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
@@ -230,7 +258,7 @@ export interface HttpHealthArgs {
     method?: pulumi.Input<string>;
     /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
-     * 500
+     * 1000
      */
     requestTimeout?: pulumi.Input<number>;
     /**

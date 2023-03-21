@@ -14,7 +14,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.0.0",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.1.0",
             "packageName": "",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
@@ -31,6 +31,10 @@
     "resources": {
         "checkmate:index/httpHealth:HttpHealth": {
             "properties": {
+                "caBundle": {
+                    "type": "string",
+                    "description": "The CA bundle to use when connecting to the target host.\n"
+                },
                 "consecutiveSuccesses": {
                     "type": "integer",
                     "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
@@ -46,6 +50,10 @@
                     },
                     "description": "HTTP Request Headers\n"
                 },
+                "insecureTls": {
+                    "type": "boolean",
+                    "description": "Wether or not to completely skip the TLS CA verification. Default false.\n"
+                },
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
@@ -60,7 +68,7 @@
                 },
                 "requestTimeout": {
                     "type": "integer",
-                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
+                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
                 },
                 "resultBody": {
                     "type": "string",
@@ -96,6 +104,10 @@
                 "url"
             ],
             "inputProperties": {
+                "caBundle": {
+                    "type": "string",
+                    "description": "The CA bundle to use when connecting to the target host.\n"
+                },
                 "consecutiveSuccesses": {
                     "type": "integer",
                     "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
@@ -111,6 +123,10 @@
                     },
                     "description": "HTTP Request Headers\n"
                 },
+                "insecureTls": {
+                    "type": "boolean",
+                    "description": "Wether or not to completely skip the TLS CA verification. Default false.\n"
+                },
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
@@ -121,7 +137,7 @@
                 },
                 "requestTimeout": {
                     "type": "integer",
-                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
+                    "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
                 },
                 "retries": {
                     "type": "integer",
@@ -146,6 +162,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering HttpHealth resources.\n",
                 "properties": {
+                    "caBundle": {
+                        "type": "string",
+                        "description": "The CA bundle to use when connecting to the target host.\n"
+                    },
                     "consecutiveSuccesses": {
                         "type": "integer",
                         "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
@@ -161,6 +181,10 @@
                         },
                         "description": "HTTP Request Headers\n"
                     },
+                    "insecureTls": {
+                        "type": "boolean",
+                        "description": "Wether or not to completely skip the TLS CA verification. Default false.\n"
+                    },
                     "interval": {
                         "type": "integer",
                         "description": "Interval in milliseconds between attemps. Default 200\n"
@@ -175,7 +199,7 @@
                     },
                     "requestTimeout": {
                         "type": "integer",
-                        "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n500\n"
+                        "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
                     },
                     "resultBody": {
                         "type": "string",
