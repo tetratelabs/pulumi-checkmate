@@ -34,7 +34,7 @@ sdk: schema sdk.nodejs licenser
 
 sdk.nodejs:
 	cd $(TFGEN) && go run main.go nodejs -o ../../../sdk
-	rm sdk/{package.json,tsconfig.json}
+	rm sdk/package.json sdk/tsconfig.json
 	sed -i -e 's/.\/package.json/..\/package.json/' sdk/utilities.ts
 	sed -i -e 's/$${VERSION}/'v${VERSION}/ sdk/scripts/install-pulumi-plugin.js
 
