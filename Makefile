@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Terraform provider version
+PROVIDER_VERSION=1.1.0
+
+# Pulumi bridged provider version (this package)
 VERSION=1.1.0
 
 default: build
@@ -34,6 +38,9 @@ sdk: schema sdk.nodejs licenser
 
 sdk.nodejs:
 	cd $(TFGEN) && go run main.go nodejs -o ../../../sdk
+	sed -e 's/$${VERSION}/${VERSION}/' \
+		-e 's/@pulumi\/checkmate/@tetratelabs\/pulumi-checkmate/' \
+		-e 's/node scripts/node sdk\/scripts/' sdk/package.json > package.json
 	rm sdk/package.json sdk/tsconfig.json
 	sed -i -e 's/.\/package.json/..\/package.json/' sdk/utilities.ts
 	sed -i -e 's/$${VERSION}/'v${VERSION}/ sdk/scripts/install-pulumi-plugin.js
@@ -51,7 +58,9 @@ install: bridge
 test: bridge
 	cd $(BRIDGE)/test && pulumi up --stack dev
 
-make providerversion:
+providerversion:
+	grep -q "github.com/tetratelabs/terraform-provider-checkmate\s\s*v${PROVIDER_VERSION}" go.mod || (echo go.mod tf provider version does not match && false)
+	grep -q "\sTFProviderVersion:.*${PROVIDER_VERSION}" provider/resources.go || (echo provider/resources.go tf provider version does not match && false)
 	grep -q "\sVersion:.*${VERSION}" provider/resources.go || (echo provider/resources.go version does not match && false)
 
 versioncheck: providerversion
@@ -60,3 +69,6 @@ versioncheck: providerversion
 
 tagcheck: versioncheck
 	git tag --points-at HEAD | grep -q v${VERSION} || (echo tag does not match specified version && false)
+
+check: licenser
+	[ -z "`git status -uno --porcelain`" ] || (git status && echo 'Check failed. This could be a failed check or dirty git state.'; exit 1)

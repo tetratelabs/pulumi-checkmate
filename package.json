@@ -1,23 +1,20 @@
 {
-  "name": "@tetratelabs/checkmate",
-  "version": "1.1.0",
-  "description": ". Based on terraform-provider-checkmate: version v1.0.0",
-  "main": "ts_bin/index.js",
-  "types": "ts_bin/index.d.ts",
-  "scripts": {
-    "prepare": "npm run build",
-    "build": "tsc",
-    "install": "node sdk/scripts/install-pulumi-plugin.js resource checkmate --server github://api.github.com/tetratelabs"
-  },
-  "dependencies": {
-    "@pulumi/pulumi": "^3.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^10.0.0",
-    "typescript": "^4.3.5"
-  },
-  "pulumi": {
-    "resource": true,
-    "name": "checkmate"
-  }
+    "name": "@tetratelabs/pulumi-checkmate",
+    "version": "1.1.0",
+    "description": ". Based on terraform-provider-checkmate: version v1.1.0",
+    "scripts": {
+        "build": "tsc",
+        "install": "node sdk/scripts/install-pulumi-plugin.js resource checkmate 1.1.0"
+    },
+    "dependencies": {
+        "@pulumi/pulumi": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^10.0.0",
+        "typescript": "^4.3.5"
+    },
+    "pulumi": {
+        "resource": true,
+        "name": "checkmate"
+    }
 }
