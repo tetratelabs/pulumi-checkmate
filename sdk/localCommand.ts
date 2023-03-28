@@ -73,11 +73,6 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
     /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    public readonly retries!: pulumi.Output<number>;
-    /**
      * Standard error output of the command
      */
     public /*out*/ readonly stderr!: pulumi.Output<string>;
@@ -113,7 +108,6 @@ export class LocalCommand extends pulumi.CustomResource {
             resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
-            resourceInputs["retries"] = state ? state.retries : undefined;
             resourceInputs["stderr"] = state ? state.stderr : undefined;
             resourceInputs["stdout"] = state ? state.stdout : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
@@ -128,7 +122,6 @@ export class LocalCommand extends pulumi.CustomResource {
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
-            resourceInputs["retries"] = args ? args.retries : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
             resourceInputs["workingDirectory"] = args ? args.workingDirectory : undefined;
             resourceInputs["passed"] = undefined /*out*/;
@@ -170,11 +163,6 @@ export interface LocalCommandState {
      * True if the check passed
      */
     passed?: pulumi.Input<boolean>;
-    /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    retries?: pulumi.Input<number>;
     /**
      * Standard error output of the command
      */
@@ -219,11 +207,6 @@ export interface LocalCommandArgs {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
-    /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    retries?: pulumi.Input<number>;
     /**
      * Overall timeout in milliseconds for the check before giving up, default 10000
      */
