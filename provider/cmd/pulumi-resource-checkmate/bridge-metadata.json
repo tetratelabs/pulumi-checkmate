@@ -9,6 +9,7 @@
       "consecutiveSuccesses": "consecutive_successes",
       "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
       "insecureTls": "insecure_tls",
+      "requestBody": "request_body",
       "requestTimeout": "request_timeout",
       "resultBody": "result_body",
       "statusCode": "status_code"

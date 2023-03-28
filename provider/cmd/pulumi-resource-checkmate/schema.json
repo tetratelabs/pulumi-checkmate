@@ -14,7 +14,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.1.0",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.2.0",
             "packageName": "",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
@@ -66,6 +66,10 @@
                     "type": "boolean",
                     "description": "True if the check passed\n"
                 },
+                "requestBody": {
+                    "type": "string",
+                    "description": "Optional request body to send on each attempt.\n"
+                },
                 "requestTimeout": {
                     "type": "integer",
                     "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
@@ -73,10 +77,6 @@
                 "resultBody": {
                     "type": "string",
                     "description": "Result body\n"
-                },
-                "retries": {
-                    "type": "integer",
-                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "statusCode": {
                     "type": "string",
@@ -98,7 +98,6 @@
                 "passed",
                 "requestTimeout",
                 "resultBody",
-                "retries",
                 "statusCode",
                 "timeout",
                 "url"
@@ -135,13 +134,13 @@
                     "type": "string",
                     "description": "HTTP Method, defaults to GET\n"
                 },
+                "requestBody": {
+                    "type": "string",
+                    "description": "Optional request body to send on each attempt.\n"
+                },
                 "requestTimeout": {
                     "type": "integer",
                     "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
-                },
-                "retries": {
-                    "type": "integer",
-                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "statusCode": {
                     "type": "string",
@@ -197,6 +196,10 @@
                         "type": "boolean",
                         "description": "True if the check passed\n"
                     },
+                    "requestBody": {
+                        "type": "string",
+                        "description": "Optional request body to send on each attempt.\n"
+                    },
                     "requestTimeout": {
                         "type": "integer",
                         "description": "Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default\n1000\n"
@@ -204,10 +207,6 @@
                     "resultBody": {
                         "type": "string",
                         "description": "Result body\n"
-                    },
-                    "retries": {
-                        "type": "integer",
-                        "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                     },
                     "statusCode": {
                         "type": "string",
@@ -251,10 +250,6 @@
                     "type": "boolean",
                     "description": "True if the check passed\n"
                 },
-                "retries": {
-                    "type": "integer",
-                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
-                },
                 "stderr": {
                     "type": "string",
                     "description": "Standard error output of the command\n"
@@ -278,7 +273,6 @@
                 "consecutiveSuccesses",
                 "interval",
                 "passed",
-                "retries",
                 "stderr",
                 "stdout",
                 "timeout",
@@ -304,10 +298,6 @@
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
-                },
-                "retries": {
-                    "type": "integer",
-                    "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                 },
                 "timeout": {
                     "type": "integer",
@@ -347,10 +337,6 @@
                     "passed": {
                         "type": "boolean",
                         "description": "True if the check passed\n"
-                    },
-                    "retries": {
-                        "type": "integer",
-                        "description": "Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not\nexpired yet. Default 5.\n"
                     },
                     "stderr": {
                         "type": "string",

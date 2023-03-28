@@ -80,6 +80,10 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
     /**
+     * Optional request body to send on each attempt.
+     */
+    public readonly requestBody!: pulumi.Output<string | undefined>;
+    /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
      * 1000
      */
@@ -88,11 +92,6 @@ export class HttpHealth extends pulumi.CustomResource {
      * Result body
      */
     public /*out*/ readonly resultBody!: pulumi.Output<string>;
-    /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    public readonly retries!: pulumi.Output<number>;
     /**
      * Status Code to expect. Default 200
      */
@@ -127,9 +126,9 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
+            resourceInputs["requestBody"] = state ? state.requestBody : undefined;
             resourceInputs["requestTimeout"] = state ? state.requestTimeout : undefined;
             resourceInputs["resultBody"] = state ? state.resultBody : undefined;
-            resourceInputs["retries"] = state ? state.retries : undefined;
             resourceInputs["statusCode"] = state ? state.statusCode : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
             resourceInputs["url"] = state ? state.url : undefined;
@@ -145,8 +144,8 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["insecureTls"] = args ? args.insecureTls : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
+            resourceInputs["requestBody"] = args ? args.requestBody : undefined;
             resourceInputs["requestTimeout"] = args ? args.requestTimeout : undefined;
-            resourceInputs["retries"] = args ? args.retries : undefined;
             resourceInputs["statusCode"] = args ? args.statusCode : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
@@ -196,6 +195,10 @@ export interface HttpHealthState {
      */
     passed?: pulumi.Input<boolean>;
     /**
+     * Optional request body to send on each attempt.
+     */
+    requestBody?: pulumi.Input<string>;
+    /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
      * 1000
      */
@@ -204,11 +207,6 @@ export interface HttpHealthState {
      * Result body
      */
     resultBody?: pulumi.Input<string>;
-    /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    retries?: pulumi.Input<number>;
     /**
      * Status Code to expect. Default 200
      */
@@ -257,15 +255,14 @@ export interface HttpHealthArgs {
      */
     method?: pulumi.Input<string>;
     /**
+     * Optional request body to send on each attempt.
+     */
+    requestBody?: pulumi.Input<string>;
+    /**
      * Timeout for an individual request. If exceeded, the attempt will be considered failure and potentially retried. Default
      * 1000
      */
     requestTimeout?: pulumi.Input<number>;
-    /**
-     * Max number of times to retry a failure. Exceeding this number will cause the check to fail even if timeout has not
-     * expired yet. Default 5.
-     */
-    retries?: pulumi.Input<number>;
     /**
      * Status Code to expect. Default 200
      */
