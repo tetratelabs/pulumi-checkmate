@@ -16,7 +16,7 @@
 PROVIDER_VERSION=1.2.0
 
 # Pulumi bridged provider version (this package)
-VERSION=1.2.0
+VERSION=1.2.1
 
 default: build
 
@@ -38,9 +38,8 @@ sdk: schema sdk.nodejs licenser
 
 sdk.nodejs:
 	cd $(TFGEN) && go run main.go nodejs -o ../../../sdk
-	sed -e 's/$${VERSION}/${VERSION}/' \
-		-e 's/@pulumi\/checkmate/@tetratelabs\/pulumi-checkmate/' \
-		-e 's/node scripts/node sdk\/scripts/' sdk/package.json > package.json
+	sed -e 's/$${VERSION}/${VERSION}/g' \
+		-e 's/$${PROVIDER_VERSION}/${PROVIDER_VERSION}/g' package.json.tpl > package.json
 	rm sdk/package.json sdk/tsconfig.json
 	sed -i -e 's/.\/package.json/..\/package.json/' sdk/utilities.ts
 	sed -i -e 's/$${VERSION}/'v${VERSION}/ sdk/scripts/install-pulumi-plugin.js

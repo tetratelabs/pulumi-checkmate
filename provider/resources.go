@@ -50,12 +50,13 @@ func Provider() tfpfbridge.ProviderInfo {
 		Name:              "checkmate",
 		GitHubOrg:         "tetratelabs",
 		TFProviderVersion: "1.2.0",
-		Version:           "1.2.0",
+		Version:           "1.2.1",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"checkmate_http_health":   {Tok: checkResourceTok(checkMod, "HttpHealth")},
 			"checkmate_local_command": {Tok: checkResourceTok(checkMod, "LocalCommand")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@tetratelabs/pulumi-checkmate",
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
