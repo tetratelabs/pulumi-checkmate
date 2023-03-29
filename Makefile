@@ -16,7 +16,7 @@
 PROVIDER_VERSION=1.2.0
 
 # Pulumi bridged provider version (this package)
-VERSION=1.2.1
+VERSION=1.2.2
 
 default: build
 

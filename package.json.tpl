@@ -2,6 +2,8 @@
   "name": "@tetratelabs/pulumi-checkmate",
   "version": "${VERSION}",
   "description": ". Based on terraform-provider-checkmate: version v${PROVIDER_VERSION}",
+  "main": "ts_bin/index.js",
+  "types": "ts_bin/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
