@@ -69,6 +69,10 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public readonly interval!: pulumi.Output<number>;
     /**
+     * Arbitrary map of string values that when changed will cause the check to run again.
+     */
+    public readonly keepers!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
      * True if the check passed
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
@@ -107,6 +111,7 @@ export class LocalCommand extends pulumi.CustomResource {
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
+            resourceInputs["keepers"] = state ? state.keepers : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
             resourceInputs["stderr"] = state ? state.stderr : undefined;
             resourceInputs["stdout"] = state ? state.stdout : undefined;
@@ -122,6 +127,7 @@ export class LocalCommand extends pulumi.CustomResource {
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
+            resourceInputs["keepers"] = args ? args.keepers : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
             resourceInputs["workingDirectory"] = args ? args.workingDirectory : undefined;
             resourceInputs["passed"] = undefined /*out*/;
@@ -159,6 +165,10 @@ export interface LocalCommandState {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Arbitrary map of string values that when changed will cause the check to run again.
+     */
+    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * True if the check passed
      */
@@ -207,6 +217,10 @@ export interface LocalCommandArgs {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Arbitrary map of string values that when changed will cause the check to run again.
+     */
+    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Overall timeout in milliseconds for the check before giving up, default 10000
      */
