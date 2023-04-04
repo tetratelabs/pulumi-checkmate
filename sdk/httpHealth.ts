@@ -72,6 +72,10 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public readonly interval!: pulumi.Output<number>;
     /**
+     * Arbitrary map of string values that when changed will cause the healthcheck to run again.
+     */
+    public readonly keepers!: pulumi.Output<{[key: string]: string} | undefined>;
+    /**
      * HTTP Method, defaults to GET
      */
     public readonly method!: pulumi.Output<string>;
@@ -124,6 +128,7 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["headers"] = state ? state.headers : undefined;
             resourceInputs["insecureTls"] = state ? state.insecureTls : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
+            resourceInputs["keepers"] = state ? state.keepers : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
             resourceInputs["requestBody"] = state ? state.requestBody : undefined;
@@ -143,6 +148,7 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["headers"] = args ? args.headers : undefined;
             resourceInputs["insecureTls"] = args ? args.insecureTls : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
+            resourceInputs["keepers"] = args ? args.keepers : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
             resourceInputs["requestBody"] = args ? args.requestBody : undefined;
             resourceInputs["requestTimeout"] = args ? args.requestTimeout : undefined;
@@ -186,6 +192,10 @@ export interface HttpHealthState {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Arbitrary map of string values that when changed will cause the healthcheck to run again.
+     */
+    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * HTTP Method, defaults to GET
      */
@@ -250,6 +260,10 @@ export interface HttpHealthArgs {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Arbitrary map of string values that when changed will cause the healthcheck to run again.
+     */
+    keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * HTTP Method, defaults to GET
      */

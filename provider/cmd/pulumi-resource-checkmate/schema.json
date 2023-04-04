@@ -14,7 +14,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.2.0",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.3.0",
             "packageName": "@tetratelabs/pulumi-checkmate",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
@@ -57,6 +57,13 @@
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
+                },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the healthcheck to run again.\n"
                 },
                 "method": {
                     "type": "string",
@@ -130,6 +137,13 @@
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
                 },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the healthcheck to run again.\n"
+                },
                 "method": {
                     "type": "string",
                     "description": "HTTP Method, defaults to GET\n"
@@ -187,6 +201,13 @@
                     "interval": {
                         "type": "integer",
                         "description": "Interval in milliseconds between attemps. Default 200\n"
+                    },
+                    "keepers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Arbitrary map of string values that when changed will cause the healthcheck to run again.\n"
                     },
                     "method": {
                         "type": "string",
@@ -246,6 +267,13 @@
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
                 },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
+                },
                 "passed": {
                     "type": "boolean",
                     "description": "True if the check passed\n"
@@ -299,6 +327,13 @@
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
                 },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
+                },
                 "timeout": {
                     "type": "integer",
                     "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
@@ -333,6 +368,13 @@
                     "interval": {
                         "type": "integer",
                         "description": "Interval in milliseconds between attemps. Default 200\n"
+                    },
+                    "keepers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
                     },
                     "passed": {
                         "type": "boolean",
