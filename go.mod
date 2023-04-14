@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.2.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.6.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.7.0
 	github.com/pulumi/pulumi/sdk/v3 v3.59.0
 	github.com/tetratelabs/terraform-provider-checkmate v1.3.0
 )
