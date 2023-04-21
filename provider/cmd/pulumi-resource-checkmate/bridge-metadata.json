@@ -1,9 +1,13 @@
 {
   "resources": {
     "checkmate:index/httpHealth:HttpHealth": "checkmate_http_health",
-    "checkmate:index/localCommand:LocalCommand": "checkmate_local_command"
+    "checkmate:index/localCommand:LocalCommand": "checkmate_local_command",
+    "checkmate:index/tcpEcho:TcpEcho": "checkmate_tcp_echo"
   },
   "renamedProperties": {
+    "checkmate:index/LocalCommandCreateFile:LocalCommandCreateFile": {
+      "useWorkingDir": "use_working_dir"
+    },
     "checkmate:index/httpHealth:HttpHealth": {
       "caBundle": "ca_bundle",
       "consecutiveSuccesses": "consecutive_successes",
@@ -18,7 +22,15 @@
       "commandTimeout": "command_timeout",
       "consecutiveSuccesses": "consecutive_successes",
       "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
+      "createFile": "create_file",
       "workingDirectory": "working_directory"
+    },
+    "checkmate:index/tcpEcho:TcpEcho": {
+      "connectionTimeout": "connection_timeout",
+      "consecutiveSuccesses": "consecutive_successes",
+      "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
+      "expectedMessage": "expected_message",
+      "singleAttemptTimeout": "single_attempt_timeout"
     }
   }
 }

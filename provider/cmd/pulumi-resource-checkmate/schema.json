@@ -14,7 +14,7 @@
                 "@types/node": "^10.0.0"
             },
             "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.3.0",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.4.0",
             "packageName": "@tetratelabs/pulumi-checkmate",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "typescriptVersion": ""
@@ -25,6 +25,38 @@
         }
     },
     "config": {},
+    "types": {
+        "checkmate:index/LocalCommandCreateFile:LocalCommandCreateFile": {
+            "properties": {
+                "contents": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "useWorkingDir": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object",
+            "required": [
+                "contents",
+                "name"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "contents",
+                        "name",
+                        "path"
+                    ]
+                }
+            }
+        }
+    },
     "provider": {
         "description": "The provider type for the checkmate package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n"
     },
@@ -87,7 +119,7 @@
                 },
                 "statusCode": {
                     "type": "string",
-                    "description": "Status Code to expect. Default 200\n"
+                    "description": "Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200\n"
                 },
                 "timeout": {
                     "type": "integer",
@@ -158,7 +190,7 @@
                 },
                 "statusCode": {
                     "type": "string",
-                    "description": "Status Code to expect. Default 200\n"
+                    "description": "Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200\n"
                 },
                 "timeout": {
                     "type": "integer",
@@ -231,7 +263,7 @@
                     },
                     "statusCode": {
                         "type": "string",
-                        "description": "Status Code to expect. Default 200\n"
+                        "description": "Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200\n"
                     },
                     "timeout": {
                         "type": "integer",
@@ -262,6 +294,17 @@
                 "createAnywayOnCheckFailure": {
                     "type": "boolean",
                     "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                },
+                "createFile": {
+                    "$ref": "#/types/checkmate:index/LocalCommandCreateFile:LocalCommandCreateFile",
+                    "description": "Ensure a file exists with the following contents. The path to this file will be available in the env var\nCHECKMATE_FILEPATH\n"
+                },
+                "env": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Map of environment variables to apply to the command\n"
                 },
                 "interval": {
                     "type": "integer",
@@ -323,6 +366,17 @@
                     "type": "boolean",
                     "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
                 },
+                "createFile": {
+                    "$ref": "#/types/checkmate:index/LocalCommandCreateFile:LocalCommandCreateFile",
+                    "description": "Ensure a file exists with the following contents. The path to this file will be available in the env var\nCHECKMATE_FILEPATH\n"
+                },
+                "env": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Map of environment variables to apply to the command\n"
+                },
                 "interval": {
                     "type": "integer",
                     "description": "Interval in milliseconds between attemps. Default 200\n"
@@ -365,6 +419,17 @@
                         "type": "boolean",
                         "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
                     },
+                    "createFile": {
+                        "$ref": "#/types/checkmate:index/LocalCommandCreateFile:LocalCommandCreateFile",
+                        "description": "Ensure a file exists with the following contents. The path to this file will be available in the env var\nCHECKMATE_FILEPATH\n"
+                    },
+                    "env": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Map of environment variables to apply to the command\n"
+                    },
                     "interval": {
                         "type": "integer",
                         "description": "Interval in milliseconds between attemps. Default 200\n"
@@ -395,6 +460,185 @@
                     "workingDirectory": {
                         "type": "string",
                         "description": "Working directory where the command will be run. Defaults to the current working directory\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "checkmate:index/tcpEcho:TcpEcho": {
+            "properties": {
+                "connectionTimeout": {
+                    "type": "integer",
+                    "description": "The timeout for stablishing a new TCP connection in milliseconds\n"
+                },
+                "consecutiveSuccesses": {
+                    "type": "integer",
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                },
+                "expectedMessage": {
+                    "type": "string",
+                    "description": "The message expected to be included in the echo response\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "The hostname where to send the TCP echo request to\n"
+                },
+                "interval": {
+                    "type": "integer",
+                    "description": "Interval in milliseconds between attemps. Default 200\n"
+                },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The message to send in the echo request\n"
+                },
+                "passed": {
+                    "type": "boolean",
+                    "description": "True if the check passed\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "The port of the hostname where to send the TCP echo request\n"
+                },
+                "singleAttemptTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
+                }
+            },
+            "required": [
+                "connectionTimeout",
+                "consecutiveSuccesses",
+                "expectedMessage",
+                "host",
+                "interval",
+                "message",
+                "passed",
+                "port",
+                "singleAttemptTimeout",
+                "timeout"
+            ],
+            "inputProperties": {
+                "connectionTimeout": {
+                    "type": "integer",
+                    "description": "The timeout for stablishing a new TCP connection in milliseconds\n"
+                },
+                "consecutiveSuccesses": {
+                    "type": "integer",
+                    "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                },
+                "createAnywayOnCheckFailure": {
+                    "type": "boolean",
+                    "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                },
+                "expectedMessage": {
+                    "type": "string",
+                    "description": "The message expected to be included in the echo response\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "The hostname where to send the TCP echo request to\n"
+                },
+                "interval": {
+                    "type": "integer",
+                    "description": "Interval in milliseconds between attemps. Default 200\n"
+                },
+                "keepers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The message to send in the echo request\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "The port of the hostname where to send the TCP echo request\n"
+                },
+                "singleAttemptTimeout": {
+                    "type": "integer",
+                    "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                },
+                "timeout": {
+                    "type": "integer",
+                    "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
+                }
+            },
+            "requiredInputs": [
+                "expectedMessage",
+                "host",
+                "message",
+                "port"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TcpEcho resources.\n",
+                "properties": {
+                    "connectionTimeout": {
+                        "type": "integer",
+                        "description": "The timeout for stablishing a new TCP connection in milliseconds\n"
+                    },
+                    "consecutiveSuccesses": {
+                        "type": "integer",
+                        "description": "Number of consecutive successes required before the check is considered successful overall. Defaults to 1.\n"
+                    },
+                    "createAnywayOnCheckFailure": {
+                        "type": "boolean",
+                        "description": "If false, the resource will fail to create if the check does not pass. If true, the resource will be created anyway.\nDefaults to false.\n"
+                    },
+                    "expectedMessage": {
+                        "type": "string",
+                        "description": "The message expected to be included in the echo response\n"
+                    },
+                    "host": {
+                        "type": "string",
+                        "description": "The hostname where to send the TCP echo request to\n"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "description": "Interval in milliseconds between attemps. Default 200\n"
+                    },
+                    "keepers": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Arbitrary map of string values that when changed will cause the check to run again.\n"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "The message to send in the echo request\n"
+                    },
+                    "passed": {
+                        "type": "boolean",
+                        "description": "True if the check passed\n"
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "The port of the hostname where to send the TCP echo request\n"
+                    },
+                    "singleAttemptTimeout": {
+                        "type": "integer",
+                        "description": "Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default\n5000ms\n"
+                    },
+                    "timeout": {
+                        "type": "integer",
+                        "description": "Overall timeout in milliseconds for the check before giving up, default 10000\n"
                     }
                 },
                 "type": "object"
