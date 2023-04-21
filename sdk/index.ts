@@ -34,6 +34,18 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
+export { TcpEchoArgs, TcpEchoState } from "./tcpEcho";
+export type TcpEcho = import("./tcpEcho").TcpEcho;
+export const TcpEcho: typeof import("./tcpEcho").TcpEcho = null as any;
+utilities.lazyLoad(exports, ["TcpEcho"], () => require("./tcpEcho"));
+
+
+// Export sub-modules:
+import * as types from "./types";
+
+export {
+    types,
+};
 
 const _module = {
     version: utilities.getVersion(),
@@ -43,6 +55,8 @@ const _module = {
                 return new HttpHealth(name, <any>undefined, { urn })
             case "checkmate:index/localCommand:LocalCommand":
                 return new LocalCommand(name, <any>undefined, { urn })
+            case "checkmate:index/tcpEcho:TcpEcho":
+                return new TcpEcho(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -50,6 +64,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("checkmate", "index/httpHealth", _module)
 pulumi.runtime.registerResourceModule("checkmate", "index/localCommand", _module)
+pulumi.runtime.registerResourceModule("checkmate", "index/tcpEcho", _module)
 pulumi.runtime.registerResourcePackage("checkmate", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

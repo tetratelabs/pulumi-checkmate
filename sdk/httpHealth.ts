@@ -97,7 +97,7 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public /*out*/ readonly resultBody!: pulumi.Output<string>;
     /**
-     * Status Code to expect. Default 200
+     * Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200
      */
     public readonly statusCode!: pulumi.Output<string>;
     /**
@@ -218,7 +218,7 @@ export interface HttpHealthState {
      */
     resultBody?: pulumi.Input<string>;
     /**
-     * Status Code to expect. Default 200
+     * Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200
      */
     statusCode?: pulumi.Input<string>;
     /**
@@ -278,7 +278,7 @@ export interface HttpHealthArgs {
      */
     requestTimeout?: pulumi.Input<number>;
     /**
-     * Status Code to expect. Default 200
+     * Status Code to expect. Can be a comma seperated list of ranges like '100-200,500'. Default 200
      */
     statusCode?: pulumi.Input<string>;
     /**

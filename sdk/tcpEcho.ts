@@ -16,13 +16,11 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-export class LocalCommand extends pulumi.CustomResource {
+export class TcpEcho extends pulumi.CustomResource {
     /**
-     * Get an existing LocalCommand resource's state with the given name, ID, and optional extra
+     * Get an existing TcpEcho resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -30,33 +28,28 @@ export class LocalCommand extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: LocalCommandState, opts?: pulumi.CustomResourceOptions): LocalCommand {
-        return new LocalCommand(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: TcpEchoState, opts?: pulumi.CustomResourceOptions): TcpEcho {
+        return new TcpEcho(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'checkmate:index/localCommand:LocalCommand';
+    public static readonly __pulumiType = 'checkmate:index/tcpEcho:TcpEcho';
 
     /**
-     * Returns true if the given object is an instance of LocalCommand.  This is designed to work even
+     * Returns true if the given object is an instance of TcpEcho.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is LocalCommand {
+    public static isInstance(obj: any): obj is TcpEcho {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === LocalCommand.__pulumiType;
+        return obj['__pulumiType'] === TcpEcho.__pulumiType;
     }
 
     /**
-     * The command to run (passed to `sh -c`)
+     * The timeout for stablishing a new TCP connection in milliseconds
      */
-    public readonly command!: pulumi.Output<string>;
-    /**
-     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
-     * 5000ms
-     */
-    public readonly commandTimeout!: pulumi.Output<number>;
+    public readonly connectionTimeout!: pulumi.Output<number>;
     /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
@@ -67,14 +60,13 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public readonly createAnywayOnCheckFailure!: pulumi.Output<boolean | undefined>;
     /**
-     * Ensure a file exists with the following contents. The path to this file will be available in the env var
-     * CHECKMATE_FILEPATH
+     * The message expected to be included in the echo response
      */
-    public readonly createFile!: pulumi.Output<outputs.LocalCommandCreateFile | undefined>;
+    public readonly expectedMessage!: pulumi.Output<string>;
     /**
-     * Map of environment variables to apply to the command
+     * The hostname where to send the TCP echo request to
      */
-    public readonly env!: pulumi.Output<{[key: string]: string} | undefined>;
+    public readonly host!: pulumi.Output<string>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -84,89 +76,92 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public readonly keepers!: pulumi.Output<{[key: string]: string} | undefined>;
     /**
+     * The message to send in the echo request
+     */
+    public readonly message!: pulumi.Output<string>;
+    /**
      * True if the check passed
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
     /**
-     * Standard error output of the command
+     * The port of the hostname where to send the TCP echo request
      */
-    public /*out*/ readonly stderr!: pulumi.Output<string>;
+    public readonly port!: pulumi.Output<number>;
     /**
-     * Standard output of the command
+     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 5000ms
      */
-    public /*out*/ readonly stdout!: pulumi.Output<string>;
+    public readonly singleAttemptTimeout!: pulumi.Output<number>;
     /**
      * Overall timeout in milliseconds for the check before giving up, default 10000
      */
     public readonly timeout!: pulumi.Output<number>;
-    /**
-     * Working directory where the command will be run. Defaults to the current working directory
-     */
-    public readonly workingDirectory!: pulumi.Output<string>;
 
     /**
-     * Create a LocalCommand resource with the given unique name, arguments, and options.
+     * Create a TcpEcho resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: LocalCommandArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: LocalCommandArgs | LocalCommandState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: TcpEchoArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: TcpEchoArgs | TcpEchoState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as LocalCommandState | undefined;
-            resourceInputs["command"] = state ? state.command : undefined;
-            resourceInputs["commandTimeout"] = state ? state.commandTimeout : undefined;
+            const state = argsOrState as TcpEchoState | undefined;
+            resourceInputs["connectionTimeout"] = state ? state.connectionTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
-            resourceInputs["createFile"] = state ? state.createFile : undefined;
-            resourceInputs["env"] = state ? state.env : undefined;
+            resourceInputs["expectedMessage"] = state ? state.expectedMessage : undefined;
+            resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
             resourceInputs["keepers"] = state ? state.keepers : undefined;
+            resourceInputs["message"] = state ? state.message : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
-            resourceInputs["stderr"] = state ? state.stderr : undefined;
-            resourceInputs["stdout"] = state ? state.stdout : undefined;
+            resourceInputs["port"] = state ? state.port : undefined;
+            resourceInputs["singleAttemptTimeout"] = state ? state.singleAttemptTimeout : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
-            resourceInputs["workingDirectory"] = state ? state.workingDirectory : undefined;
         } else {
-            const args = argsOrState as LocalCommandArgs | undefined;
-            if ((!args || args.command === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'command'");
+            const args = argsOrState as TcpEchoArgs | undefined;
+            if ((!args || args.expectedMessage === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'expectedMessage'");
             }
-            resourceInputs["command"] = args ? args.command : undefined;
-            resourceInputs["commandTimeout"] = args ? args.commandTimeout : undefined;
+            if ((!args || args.host === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'host'");
+            }
+            if ((!args || args.message === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'message'");
+            }
+            if ((!args || args.port === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'port'");
+            }
+            resourceInputs["connectionTimeout"] = args ? args.connectionTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
-            resourceInputs["createFile"] = args ? args.createFile : undefined;
-            resourceInputs["env"] = args ? args.env : undefined;
+            resourceInputs["expectedMessage"] = args ? args.expectedMessage : undefined;
+            resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["keepers"] = args ? args.keepers : undefined;
+            resourceInputs["message"] = args ? args.message : undefined;
+            resourceInputs["port"] = args ? args.port : undefined;
+            resourceInputs["singleAttemptTimeout"] = args ? args.singleAttemptTimeout : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
-            resourceInputs["workingDirectory"] = args ? args.workingDirectory : undefined;
             resourceInputs["passed"] = undefined /*out*/;
-            resourceInputs["stderr"] = undefined /*out*/;
-            resourceInputs["stdout"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(LocalCommand.__pulumiType, name, resourceInputs, opts);
+        super(TcpEcho.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering LocalCommand resources.
+ * Input properties used for looking up and filtering TcpEcho resources.
  */
-export interface LocalCommandState {
+export interface TcpEchoState {
     /**
-     * The command to run (passed to `sh -c`)
+     * The timeout for stablishing a new TCP connection in milliseconds
      */
-    command?: pulumi.Input<string>;
-    /**
-     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
-     * 5000ms
-     */
-    commandTimeout?: pulumi.Input<number>;
+    connectionTimeout?: pulumi.Input<number>;
     /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
@@ -177,14 +172,13 @@ export interface LocalCommandState {
      */
     createAnywayOnCheckFailure?: pulumi.Input<boolean>;
     /**
-     * Ensure a file exists with the following contents. The path to this file will be available in the env var
-     * CHECKMATE_FILEPATH
+     * The message expected to be included in the echo response
      */
-    createFile?: pulumi.Input<inputs.LocalCommandCreateFile>;
+    expectedMessage?: pulumi.Input<string>;
     /**
-     * Map of environment variables to apply to the command
+     * The hostname where to send the TCP echo request to
      */
-    env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    host?: pulumi.Input<string>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -193,41 +187,37 @@ export interface LocalCommandState {
      * Arbitrary map of string values that when changed will cause the check to run again.
      */
     keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * The message to send in the echo request
+     */
+    message?: pulumi.Input<string>;
     /**
      * True if the check passed
      */
     passed?: pulumi.Input<boolean>;
     /**
-     * Standard error output of the command
+     * The port of the hostname where to send the TCP echo request
      */
-    stderr?: pulumi.Input<string>;
-    /**
-     * Standard output of the command
-     */
-    stdout?: pulumi.Input<string>;
-    /**
-     * Overall timeout in milliseconds for the check before giving up, default 10000
-     */
-    timeout?: pulumi.Input<number>;
-    /**
-     * Working directory where the command will be run. Defaults to the current working directory
-     */
-    workingDirectory?: pulumi.Input<string>;
-}
-
-/**
- * The set of arguments for constructing a LocalCommand resource.
- */
-export interface LocalCommandArgs {
-    /**
-     * The command to run (passed to `sh -c`)
-     */
-    command: pulumi.Input<string>;
+    port?: pulumi.Input<number>;
     /**
      * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
      * 5000ms
      */
-    commandTimeout?: pulumi.Input<number>;
+    singleAttemptTimeout?: pulumi.Input<number>;
+    /**
+     * Overall timeout in milliseconds for the check before giving up, default 10000
+     */
+    timeout?: pulumi.Input<number>;
+}
+
+/**
+ * The set of arguments for constructing a TcpEcho resource.
+ */
+export interface TcpEchoArgs {
+    /**
+     * The timeout for stablishing a new TCP connection in milliseconds
+     */
+    connectionTimeout?: pulumi.Input<number>;
     /**
      * Number of consecutive successes required before the check is considered successful overall. Defaults to 1.
      */
@@ -238,14 +228,13 @@ export interface LocalCommandArgs {
      */
     createAnywayOnCheckFailure?: pulumi.Input<boolean>;
     /**
-     * Ensure a file exists with the following contents. The path to this file will be available in the env var
-     * CHECKMATE_FILEPATH
+     * The message expected to be included in the echo response
      */
-    createFile?: pulumi.Input<inputs.LocalCommandCreateFile>;
+    expectedMessage: pulumi.Input<string>;
     /**
-     * Map of environment variables to apply to the command
+     * The hostname where to send the TCP echo request to
      */
-    env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    host: pulumi.Input<string>;
     /**
      * Interval in milliseconds between attemps. Default 200
      */
@@ -255,11 +244,20 @@ export interface LocalCommandArgs {
      */
     keepers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
+     * The message to send in the echo request
+     */
+    message: pulumi.Input<string>;
+    /**
+     * The port of the hostname where to send the TCP echo request
+     */
+    port: pulumi.Input<number>;
+    /**
+     * Timeout for an individual attempt. If exceeded, the attempt will be considered failure and potentially retried. Default
+     * 5000ms
+     */
+    singleAttemptTimeout?: pulumi.Input<number>;
+    /**
      * Overall timeout in milliseconds for the check before giving up, default 10000
      */
     timeout?: pulumi.Input<number>;
-    /**
-     * Working directory where the command will be run. Defaults to the current working directory
-     */
-    workingDirectory?: pulumi.Input<string>;
 }
