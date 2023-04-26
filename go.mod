@@ -6,7 +6,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework v1.2.0
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.8.1
 	github.com/pulumi/pulumi/sdk/v3 v3.63.0
-	github.com/tetratelabs/terraform-provider-checkmate v1.4.0
+	github.com/tetratelabs/terraform-provider-checkmate v1.5.0
 )
 
 require github.com/pulumi/pulumi-terraform-bridge/v3 v3.43.1-0.20230328212400-4806fbe25bd9

@@ -72,7 +72,7 @@ export class LocalCommand extends pulumi.CustomResource {
      */
     public readonly createFile!: pulumi.Output<outputs.LocalCommandCreateFile | undefined>;
     /**
-     * Map of environment variables to apply to the command
+     * Map of environment variables to apply to the command. Inherits the parent environment
      */
     public readonly env!: pulumi.Output<{[key: string]: string} | undefined>;
     /**
@@ -182,7 +182,7 @@ export interface LocalCommandState {
      */
     createFile?: pulumi.Input<inputs.LocalCommandCreateFile>;
     /**
-     * Map of environment variables to apply to the command
+     * Map of environment variables to apply to the command. Inherits the parent environment
      */
     env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
@@ -243,7 +243,7 @@ export interface LocalCommandArgs {
      */
     createFile?: pulumi.Input<inputs.LocalCommandCreateFile>;
     /**
-     * Map of environment variables to apply to the command
+     * Map of environment variables to apply to the command. Inherits the parent environment
      */
     env?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**

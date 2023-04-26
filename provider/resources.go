@@ -53,8 +53,8 @@ func Provider() tfpfbridge.ProviderInfo {
 	info := tfbridge.ProviderInfo{
 		Name:              "checkmate",
 		GitHubOrg:         "tetratelabs",
-		TFProviderVersion: "1.4.0",
-		Version:           "1.4.1",
+		TFProviderVersion: "1.5.0",
+		Version:           "1.5.0",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"checkmate_http_health":   {Tok: checkResourceTok(checkMod, "HttpHealth")},
 			"checkmate_local_command": {Tok: checkResourceTok(checkMod, "LocalCommand")},

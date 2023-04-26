@@ -21,6 +21,7 @@ import * as outputs from "../types/output";
 
 export interface LocalCommandCreateFile {
     contents: pulumi.Input<string>;
+    createDirectory?: pulumi.Input<boolean>;
     name: pulumi.Input<string>;
     path?: pulumi.Input<string>;
     useWorkingDir?: pulumi.Input<boolean>;
