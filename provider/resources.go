@@ -26,9 +26,6 @@ import (
 	provider "github.com/tetratelabs/terraform-provider-checkmate/pkg"
 )
 
-//go:embed cmd/pulumi-resource-checkmate/bridge-metadata.json
-var bridgeMetadata []byte
-
 const checkPkg = "checkmate"
 const checkMod = "index"
 
@@ -69,7 +66,6 @@ func Provider() tfpfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
 		},
-		MetadataInfo: tfbridge.NewProviderMetadata(bridgeMetadata),
 	}
 	return tfpfbridge.ProviderInfo{
 		ProviderInfo: info,

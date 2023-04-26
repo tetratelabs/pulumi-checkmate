@@ -54,7 +54,7 @@ install: bridge
 
 # tests a simple pulumi program using this provider
 # TODO: currently needs the bridge and provider to be installed
-test: bridge
+test: install
 	cd $(BRIDGE)/test && pulumi up --stack dev
 
 providerversion:
