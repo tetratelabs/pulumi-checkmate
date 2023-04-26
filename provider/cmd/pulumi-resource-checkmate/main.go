@@ -26,13 +26,9 @@ import (
 //go:embed schema.json
 var pulumiSchema []byte
 
-//go:embed bridge-metadata.json
-var bridgeMetadata []byte
-
 func main() {
 	meta := tfbridge.ProviderMetadata{
-		PackageSchema:  pulumiSchema,
-		BridgeMetadata: bridgeMetadata,
+		PackageSchema: pulumiSchema,
 	}
 	tfbridge.Main(context.Background(), "checkmate", checkmate.Provider(), meta)
 }
