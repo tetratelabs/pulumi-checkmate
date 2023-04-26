@@ -21,6 +21,7 @@ import * as outputs from "../types/output";
 
 export interface LocalCommandCreateFile {
     contents: string;
+    createDirectory?: boolean;
     name: string;
     path: string;
     useWorkingDir?: boolean;
