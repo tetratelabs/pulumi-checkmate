@@ -16,7 +16,7 @@
 PROVIDER_VERSION=1.5.0
 
 # Pulumi bridged provider version (this package)
-VERSION=1.5.1
+VERSION=1.5.2
 
 default: build
 
@@ -54,7 +54,7 @@ install: bridge
 
 # tests a simple pulumi program using this provider
 # TODO: currently needs the bridge and provider to be installed
-test: bridge
+test: install
 	cd $(BRIDGE)/test && pulumi up --stack dev
 
 providerversion:

@@ -5,12 +5,10 @@ resources:
     type: checkmate:index/httpHealth:HttpHealth
     properties:
       url: "https://example.com"
-      retries: 5
       consecutiveSuccesses: 1
   r2:
     type: checkmate:index/localCommand:LocalCommand
     properties:
       command: "echo hello world"
-      retries: 5
       consecutiveSuccesses: 1
       timeout: 10000
