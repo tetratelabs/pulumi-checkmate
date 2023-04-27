@@ -4,12 +4,12 @@ go 1.20
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.2.0
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.7.0
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.8.1
 	github.com/pulumi/pulumi/sdk/v3 v3.63.0
 	github.com/tetratelabs/terraform-provider-checkmate v1.5.0
 )
 
-require github.com/pulumi/pulumi-terraform-bridge/v3 v3.43.1-0.20230328212400-4806fbe25bd9
+require github.com/pulumi/pulumi-terraform-bridge/v3 v3.45.0
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
@@ -174,6 +174,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/pulumi/pulumi-java/pkg v0.9.0 // indirect
+	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.3 // indirect
 	github.com/pulumi/pulumi-yaml v1.1.0 // indirect
 	github.com/pulumi/pulumi/pkg/v3 v3.63.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect

@@ -21,5 +21,5 @@ import (
 )
 
 func main() {
-	tfgen.Main("checkmate", checkmate.Provider())
+	tfgen.Main("checkmate", checkmate.Provider(make([]byte, 0)))
 }

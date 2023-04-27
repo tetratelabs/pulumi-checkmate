@@ -16,7 +16,7 @@
 PROVIDER_VERSION=1.5.0
 
 # Pulumi bridged provider version (this package)
-VERSION=1.5.2
+VERSION=1.5.3
 
 default: build
 
@@ -55,7 +55,7 @@ install: bridge
 # tests a simple pulumi program using this provider
 # TODO: currently needs the bridge and provider to be installed
 test: install
-	cd $(BRIDGE)/test && pulumi up --stack dev
+	cd $(BRIDGE)/test && pulumi stack --stack dev rm --force -y ; pulumi up --stack dev -yf
 
 providerversion:
 	grep -q "github.com/tetratelabs/terraform-provider-checkmate\s\s*v${PROVIDER_VERSION}" go.mod || (echo go.mod tf provider version does not match && false)
