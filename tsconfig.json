@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "allowJs": true,
         "outDir": "dist",
         "target": "es2016",
         "module": "commonjs",
@@ -13,7 +14,7 @@
         "strict": true,
         "resolveJsonModule": true
     },
-    "include": ["package.json"],
+    "include": ["package.json", "sdk/scripts/install-pulumi-plugin.js"],
     "files": [
         "index.ts",
         "sdk/httpHealth.ts",
