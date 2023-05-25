@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "ts_bin",
+        "outDir": "dist",
         "target": "es2016",
         "module": "commonjs",
         "moduleResolution": "node",
