@@ -13,10 +13,10 @@
 # limitations under the License.
 
 # Terraform provider version
-PROVIDER_VERSION=1.5.0
+PROVIDER_VERSION=1.6.0
 
 # Pulumi bridged provider version (this package)
-VERSION=1.5.4
+VERSION=1.6.0
 
 default: build
 
@@ -42,7 +42,8 @@ sdk.nodejs:
 		-e 's/$${PROVIDER_VERSION}/${PROVIDER_VERSION}/g' package.json.tpl > package.json
 	rm sdk/package.json sdk/tsconfig.json
 	sed -i -e 's/.\/package.json/..\/package.json/' sdk/utilities.ts
-	sed -i -e 's/$${VERSION}/'v${VERSION}/ sdk/scripts/install-pulumi-plugin.js
+	mkdir -p sdk/scripts
+	sed -e 's/$${VERSION}/'v${VERSION}/ install-pulumi-plugin.js > sdk/scripts/install-pulumi-plugin.js
 
 # builds the pulumi terraform bridge
 bridge: schema
