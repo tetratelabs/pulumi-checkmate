@@ -6,22 +6,22 @@
     },
     "language": {
         "nodejs": {
-            "compatibility": "tfbridge20",
+            "packageName": "@tetratelabs/pulumi-checkmate",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.6.0",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
             },
             "devDependencies": {
                 "@types/node": "^10.0.0"
             },
-            "disableUnionOutputTypes": true,
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.5.0",
-            "packageName": "@tetratelabs/pulumi-checkmate",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
-            "typescriptVersion": ""
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
         },
         "python": {
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "compatibility": "tfbridge20",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues)."
+            "pyproject": {}
         }
     },
     "config": {},
