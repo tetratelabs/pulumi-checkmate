@@ -17,7 +17,7 @@ var childProcess = require("child_process");
 
 var args = process.argv.slice(2);
 
-if (args.indexOf("v1.5.4") !== -1) {
+if (args.indexOf("${VERSION}") !== -1) {
 	process.exit(0);
 }
 
