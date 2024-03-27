@@ -1,4 +1,4 @@
-// Copyright 2023 Tetrate
+// Copyright 2024 Tetrate
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -72,6 +72,16 @@ export class HttpHealth extends pulumi.CustomResource {
      */
     public readonly interval!: pulumi.Output<number>;
     /**
+     * Optional regular expression to apply to the result of the JSONPath expression. If the expression matches, the check will
+     * pass.
+     */
+    public readonly jsonValue!: pulumi.Output<string | undefined>;
+    /**
+     * Optional JSONPath expression (same syntax as kubectl jsonpath output) to apply to the result body. If the expression
+     * matches, the check will pass.
+     */
+    public readonly jsonpath!: pulumi.Output<string | undefined>;
+    /**
      * Arbitrary map of string values that when changed will cause the healthcheck to run again.
      */
     public readonly keepers!: pulumi.Output<{[key: string]: string} | undefined>;
@@ -128,6 +138,8 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["headers"] = state ? state.headers : undefined;
             resourceInputs["insecureTls"] = state ? state.insecureTls : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
+            resourceInputs["jsonValue"] = state ? state.jsonValue : undefined;
+            resourceInputs["jsonpath"] = state ? state.jsonpath : undefined;
             resourceInputs["keepers"] = state ? state.keepers : undefined;
             resourceInputs["method"] = state ? state.method : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
@@ -148,6 +160,8 @@ export class HttpHealth extends pulumi.CustomResource {
             resourceInputs["headers"] = args ? args.headers : undefined;
             resourceInputs["insecureTls"] = args ? args.insecureTls : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
+            resourceInputs["jsonValue"] = args ? args.jsonValue : undefined;
+            resourceInputs["jsonpath"] = args ? args.jsonpath : undefined;
             resourceInputs["keepers"] = args ? args.keepers : undefined;
             resourceInputs["method"] = args ? args.method : undefined;
             resourceInputs["requestBody"] = args ? args.requestBody : undefined;
@@ -192,6 +206,16 @@ export interface HttpHealthState {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Optional regular expression to apply to the result of the JSONPath expression. If the expression matches, the check will
+     * pass.
+     */
+    jsonValue?: pulumi.Input<string>;
+    /**
+     * Optional JSONPath expression (same syntax as kubectl jsonpath output) to apply to the result body. If the expression
+     * matches, the check will pass.
+     */
+    jsonpath?: pulumi.Input<string>;
     /**
      * Arbitrary map of string values that when changed will cause the healthcheck to run again.
      */
@@ -260,6 +284,16 @@ export interface HttpHealthArgs {
      * Interval in milliseconds between attemps. Default 200
      */
     interval?: pulumi.Input<number>;
+    /**
+     * Optional regular expression to apply to the result of the JSONPath expression. If the expression matches, the check will
+     * pass.
+     */
+    jsonValue?: pulumi.Input<string>;
+    /**
+     * Optional JSONPath expression (same syntax as kubectl jsonpath output) to apply to the result body. If the expression
+     * matches, the check will pass.
+     */
+    jsonpath?: pulumi.Input<string>;
     /**
      * Arbitrary map of string values that when changed will cause the healthcheck to run again.
      */

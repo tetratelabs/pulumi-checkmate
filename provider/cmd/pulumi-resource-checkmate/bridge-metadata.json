@@ -15,6 +15,7 @@
                 "consecutiveSuccesses": "consecutive_successes",
                 "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
                 "insecureTls": "insecure_tls",
+                "jsonValue": "json_value",
                 "requestBody": "request_body",
                 "requestTimeout": "request_timeout",
                 "resultBody": "result_body",
