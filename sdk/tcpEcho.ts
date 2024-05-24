@@ -60,6 +60,11 @@ export class TcpEcho extends pulumi.CustomResource {
      */
     public readonly createAnywayOnCheckFailure!: pulumi.Output<boolean | undefined>;
     /**
+     * Wether or not the check is expected to fail after successfully connecting to the target. If true, the check will be
+     * considered successful if it fails. Defaults to false.
+     */
+    public readonly expectWriteFailure!: pulumi.Output<boolean>;
+    /**
      * The message expected to be included in the echo response
      */
     public readonly expectedMessage!: pulumi.Output<string>;
@@ -113,6 +118,7 @@ export class TcpEcho extends pulumi.CustomResource {
             resourceInputs["connectionTimeout"] = state ? state.connectionTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = state ? state.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = state ? state.createAnywayOnCheckFailure : undefined;
+            resourceInputs["expectWriteFailure"] = state ? state.expectWriteFailure : undefined;
             resourceInputs["expectedMessage"] = state ? state.expectedMessage : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["interval"] = state ? state.interval : undefined;
@@ -124,9 +130,6 @@ export class TcpEcho extends pulumi.CustomResource {
             resourceInputs["timeout"] = state ? state.timeout : undefined;
         } else {
             const args = argsOrState as TcpEchoArgs | undefined;
-            if ((!args || args.expectedMessage === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'expectedMessage'");
-            }
             if ((!args || args.host === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'host'");
             }
@@ -139,6 +142,7 @@ export class TcpEcho extends pulumi.CustomResource {
             resourceInputs["connectionTimeout"] = args ? args.connectionTimeout : undefined;
             resourceInputs["consecutiveSuccesses"] = args ? args.consecutiveSuccesses : undefined;
             resourceInputs["createAnywayOnCheckFailure"] = args ? args.createAnywayOnCheckFailure : undefined;
+            resourceInputs["expectWriteFailure"] = args ? args.expectWriteFailure : undefined;
             resourceInputs["expectedMessage"] = args ? args.expectedMessage : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["interval"] = args ? args.interval : undefined;
@@ -171,6 +175,11 @@ export interface TcpEchoState {
      * Defaults to false.
      */
     createAnywayOnCheckFailure?: pulumi.Input<boolean>;
+    /**
+     * Wether or not the check is expected to fail after successfully connecting to the target. If true, the check will be
+     * considered successful if it fails. Defaults to false.
+     */
+    expectWriteFailure?: pulumi.Input<boolean>;
     /**
      * The message expected to be included in the echo response
      */
@@ -228,9 +237,14 @@ export interface TcpEchoArgs {
      */
     createAnywayOnCheckFailure?: pulumi.Input<boolean>;
     /**
+     * Wether or not the check is expected to fail after successfully connecting to the target. If true, the check will be
+     * considered successful if it fails. Defaults to false.
+     */
+    expectWriteFailure?: pulumi.Input<boolean>;
+    /**
      * The message expected to be included in the echo response
      */
-    expectedMessage: pulumi.Input<string>;
+    expectedMessage?: pulumi.Input<string>;
     /**
      * The hostname where to send the TCP echo request to
      */

@@ -3,7 +3,6 @@
   "version": "${VERSION}",
   "description": ". Based on terraform-provider-checkmate: version v${PROVIDER_VERSION}",
   "types": "dist/index.d.ts",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
