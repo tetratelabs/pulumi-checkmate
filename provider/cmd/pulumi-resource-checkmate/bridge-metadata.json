@@ -32,6 +32,7 @@
                 "connectionTimeout": "connection_timeout",
                 "consecutiveSuccesses": "consecutive_successes",
                 "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
+                "expectWriteFailure": "expect_write_failure",
                 "expectedMessage": "expected_message",
                 "singleAttemptTimeout": "single_attempt_timeout"
             }

@@ -48,11 +48,11 @@ func checkResourceTok(mod string, res string) tokens.Type {
 
 func Provider() tfbridge.ProviderInfo {
 	return tfbridge.ProviderInfo{
-        P: tfpfbridge.ShimProvider(provider.NewProvider()),
+		P:                 tfpfbridge.ShimProvider(provider.NewProvider()),
 		Name:              "checkmate",
 		GitHubOrg:         "tetratelabs",
-		TFProviderVersion: "1.7.0",
-		Version:           "1.7.1",
+		TFProviderVersion: "1.8.0",
+		Version:           "1.8.0",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"checkmate_http_health":   {Tok: checkResourceTok(checkMod, "HttpHealth")},
 			"checkmate_local_command": {Tok: checkResourceTok(checkMod, "LocalCommand")},
@@ -67,6 +67,6 @@ func Provider() tfbridge.ProviderInfo {
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
 			},
 		},
-        MetadataInfo: tfbridge.NewProviderMetadata([]byte{}),
+		MetadataInfo: tfbridge.NewProviderMetadata([]byte{}),
 	}
 }
