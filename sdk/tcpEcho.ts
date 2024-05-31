@@ -89,6 +89,14 @@ export class TcpEcho extends pulumi.CustomResource {
      */
     public /*out*/ readonly passed!: pulumi.Output<boolean>;
     /**
+     * A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the
+     * response is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every
+     * susequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.
+     * The check will be deemed successful if the regex matches the response text in every attempt. A single response not
+     * matching such value will cause the check to fail.
+     */
+    public readonly persistentResponseRegex!: pulumi.Output<string>;
+    /**
      * The port of the hostname where to send the TCP echo request
      */
     public readonly port!: pulumi.Output<number>;
@@ -125,6 +133,7 @@ export class TcpEcho extends pulumi.CustomResource {
             resourceInputs["keepers"] = state ? state.keepers : undefined;
             resourceInputs["message"] = state ? state.message : undefined;
             resourceInputs["passed"] = state ? state.passed : undefined;
+            resourceInputs["persistentResponseRegex"] = state ? state.persistentResponseRegex : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["singleAttemptTimeout"] = state ? state.singleAttemptTimeout : undefined;
             resourceInputs["timeout"] = state ? state.timeout : undefined;
@@ -148,6 +157,7 @@ export class TcpEcho extends pulumi.CustomResource {
             resourceInputs["interval"] = args ? args.interval : undefined;
             resourceInputs["keepers"] = args ? args.keepers : undefined;
             resourceInputs["message"] = args ? args.message : undefined;
+            resourceInputs["persistentResponseRegex"] = args ? args.persistentResponseRegex : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["singleAttemptTimeout"] = args ? args.singleAttemptTimeout : undefined;
             resourceInputs["timeout"] = args ? args.timeout : undefined;
@@ -205,6 +215,14 @@ export interface TcpEchoState {
      */
     passed?: pulumi.Input<boolean>;
     /**
+     * A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the
+     * response is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every
+     * susequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.
+     * The check will be deemed successful if the regex matches the response text in every attempt. A single response not
+     * matching such value will cause the check to fail.
+     */
+    persistentResponseRegex?: pulumi.Input<string>;
+    /**
      * The port of the hostname where to send the TCP echo request
      */
     port?: pulumi.Input<number>;
@@ -261,6 +279,14 @@ export interface TcpEchoArgs {
      * The message to send in the echo request
      */
     message: pulumi.Input<string>;
+    /**
+     * A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the
+     * response is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every
+     * susequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.
+     * The check will be deemed successful if the regex matches the response text in every attempt. A single response not
+     * matching such value will cause the check to fail.
+     */
+    persistentResponseRegex?: pulumi.Input<string>;
     /**
      * The port of the hostname where to send the TCP echo request
      */
