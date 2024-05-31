@@ -9,7 +9,7 @@ require (
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.21.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.67.0
 	github.com/pulumi/pulumi/sdk/v3 v3.95.0
-	github.com/tetratelabs/terraform-provider-checkmate v1.8.0
+	github.com/tetratelabs/terraform-provider-checkmate v1.8.1
 )
 
 require (
