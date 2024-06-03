@@ -34,6 +34,7 @@
                 "createAnywayOnCheckFailure": "create_anyway_on_check_failure",
                 "expectWriteFailure": "expect_write_failure",
                 "expectedMessage": "expected_message",
+                "persistentResponseRegex": "persistent_response_regex",
                 "singleAttemptTimeout": "single_attempt_timeout"
             }
         }

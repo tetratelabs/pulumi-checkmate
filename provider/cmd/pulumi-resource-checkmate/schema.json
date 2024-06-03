@@ -7,7 +7,7 @@
     "language": {
         "nodejs": {
             "packageName": "@tetratelabs/pulumi-checkmate",
-            "packageDescription": ". Based on terraform-provider-checkmate: version v1.8.0",
+            "packageDescription": ". Based on terraform-provider-checkmate: version v1.8.1",
             "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/tetratelabs/terraform-provider-checkmate)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-checkmate` repo](/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-checkmate` repo](https://github.com/tetratelabs/terraform-provider-checkmate/issues).",
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
@@ -537,6 +537,10 @@
                     "type": "boolean",
                     "description": "True if the check passed\n"
                 },
+                "persistentResponseRegex": {
+                    "type": "string",
+                    "description": "A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the\nresponse is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every\nsusequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.\nThe check will be deemed successful if the regex matches the response text in every attempt. A single response not\nmatching such value will cause the check to fail.\n"
+                },
                 "port": {
                     "type": "integer",
                     "description": "The port of the hostname where to send the TCP echo request\n"
@@ -559,6 +563,7 @@
                 "interval",
                 "message",
                 "passed",
+                "persistentResponseRegex",
                 "port",
                 "singleAttemptTimeout",
                 "timeout"
@@ -602,6 +607,10 @@
                 "message": {
                     "type": "string",
                     "description": "The message to send in the echo request\n"
+                },
+                "persistentResponseRegex": {
+                    "type": "string",
+                    "description": "A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the\nresponse is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every\nsusequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.\nThe check will be deemed successful if the regex matches the response text in every attempt. A single response not\nmatching such value will cause the check to fail.\n"
                 },
                 "port": {
                     "type": "integer",
@@ -666,6 +675,10 @@
                     "passed": {
                         "type": "boolean",
                         "description": "True if the check passed\n"
+                    },
+                    "persistentResponseRegex": {
+                        "type": "string",
+                        "description": "A regex pattern that the response need to match in every attempt to be considered successful. If not provided, the\nresponse is not checked. If using multiple attempts, this regex will be evaulated against the response text. For every\nsusequent attempt, the regex will be evaluated against the response text and compared against the first obtained value.\nThe check will be deemed successful if the regex matches the response text in every attempt. A single response not\nmatching such value will cause the check to fail.\n"
                     },
                     "port": {
                         "type": "integer",
