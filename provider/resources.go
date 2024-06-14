@@ -51,8 +51,8 @@ func Provider() tfbridge.ProviderInfo {
 		P:                 tfpfbridge.ShimProvider(provider.NewProvider()),
 		Name:              "checkmate",
 		GitHubOrg:         "tetratelabs",
-		TFProviderVersion: "1.8.1",
-		Version:           "1.8.1",
+		TFProviderVersion: "1.8.2",
+		Version:           "1.8.2",
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"checkmate_http_health":   {Tok: checkResourceTok(checkMod, "HttpHealth")},
 			"checkmate_local_command": {Tok: checkResourceTok(checkMod, "LocalCommand")},
